@@ -1,0 +1,8 @@
+<type>(<scope>): <short summary>
+
+# Description (optional)
+# - What was changed?
+# - Why was it changed?
+
+# Related issues (optional)
+# Closes #issue-number
