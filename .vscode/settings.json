@@ -1,0 +1,33 @@
+{
+    // Auto convert ~ to src
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "js/ts.implicitProjectConfig.baseUrl": ".",
+    "js/ts.implicitProjectConfig.paths": {
+        "@/*": ["src/*"]
+    },
+    // Prettier config
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "prettier.enable": true,
+    "scss.validate": false,
+    "css.validate": false,
+    "less.validate": false,
+
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
