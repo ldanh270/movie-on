@@ -1,0 +1,209 @@
+{
+    "plugins": ["stylelint-order"],
+    "rules": {
+        "order/properties-order": [
+            [
+                {
+                    "groupName": "Positioning",
+                    "emptyLineBefore": "always",
+                    "properties": ["position", "inset", "top", "right", "bottom", "left", "z-index"]
+                },
+                {
+                    "groupName": "Layout & Box Model",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "display",
+                        "visibility",
+                        "float",
+                        "clear",
+                        "overflow",
+                        "overflow-x",
+                        "overflow-y",
+                        "box-sizing",
+                        "width",
+                        "min-width",
+                        "max-width",
+                        "height",
+                        "min-height",
+                        "max-height",
+                        "aspect-ratio",
+                        "margin",
+                        "margin-top",
+                        "margin-right",
+                        "margin-bottom",
+                        "margin-left",
+                        "padding",
+                        "padding-top",
+                        "padding-right",
+                        "padding-bottom",
+                        "padding-left"
+                    ]
+                },
+                {
+                    "groupName": "Flex & Grid",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "flex",
+                        "flex-basis",
+                        "flex-direction",
+                        "flex-grow",
+                        "flex-shrink",
+                        "flex-wrap",
+                        "justify-content",
+                        "align-items",
+                        "align-content",
+                        "align-self",
+                        "order",
+                        "gap",
+                        "row-gap",
+                        "column-gap",
+                        "grid",
+                        "grid-area",
+                        "grid-template",
+                        "grid-template-areas",
+                        "grid-template-rows",
+                        "grid-template-columns",
+                        "grid-row",
+                        "grid-row-start",
+                        "grid-row-end",
+                        "grid-column",
+                        "grid-column-start",
+                        "grid-column-end",
+                        "place-content",
+                        "place-items",
+                        "place-self"
+                    ]
+                },
+                {
+                    "groupName": "Position Decoration",
+                    "emptyLineBefore": "always",
+                    "properties": ["top", "right", "bottom", "left", "inset", "clip", "clip-path"]
+                },
+                {
+                    "groupName": "Visual",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-position",
+                        "background-repeat",
+                        "background-size",
+                        "background-clip",
+                        "background-origin",
+                        "border",
+                        "border-width",
+                        "border-style",
+                        "border-color",
+                        "border-top",
+                        "border-right",
+                        "border-bottom",
+                        "border-left",
+                        "border-radius",
+                        "border-collapse",
+                        "box-shadow",
+                        "box-decoration-break",
+                        "outline",
+                        "outline-width",
+                        "outline-style",
+                        "outline-color",
+                        "outline-offset",
+                        "opacity",
+                        "filter",
+                        "backdrop-filter",
+                        "mix-blend-mode",
+                        "isolation",
+                        "visibility"
+                    ]
+                },
+                {
+                    "groupName": "Typography",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "font",
+                        "font-family",
+                        "font-size",
+                        "font-style",
+                        "font-weight",
+                        "font-variant",
+                        "font-display",
+                        "line-height",
+                        "letter-spacing",
+                        "word-spacing",
+                        "color",
+                        "text-align",
+                        "text-align-last",
+                        "text-indent",
+                        "text-justify",
+                        "text-overflow",
+                        "text-decoration",
+                        "text-transform",
+                        "text-rendering",
+                        "white-space",
+                        "word-break",
+                        "word-wrap",
+                        "overflow-wrap",
+                        "hyphens",
+                        "direction",
+                        "unicode-bidi"
+                    ]
+                },
+                {
+                    "groupName": "Table",
+                    "emptyLineBefore": "always",
+                    "properties": ["table-layout", "border-spacing", "border-collapse", "caption-side", "empty-cells"]
+                },
+                {
+                    "groupName": "Animation & Transition",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "transition",
+                        "transition-delay",
+                        "transition-duration",
+                        "transition-property",
+                        "transition-timing-function",
+                        "animation",
+                        "animation-name",
+                        "animation-duration",
+                        "animation-play-state",
+                        "animation-delay",
+                        "animation-iteration-count",
+                        "animation-direction",
+                        "animation-fill-mode",
+                        "animation-timing-function"
+                    ]
+                },
+                {
+                    "groupName": "Transform",
+                    "emptyLineBefore": "always",
+                    "properties": [
+                        "transform",
+                        "transform-origin",
+                        "transform-style",
+                        "perspective",
+                        "perspective-origin",
+                        "backface-visibility"
+                    ]
+                },
+                {
+                    "groupName": "Interactions",
+                    "emptyLineBefore": "always",
+                    "properties": ["pointer-events", "cursor", "touch-action", "user-select"]
+                },
+                {
+                    "groupName": "Accessibility",
+                    "emptyLineBefore": "always",
+                    "properties": ["visibility", "tab-index", "resize", "caret-color"]
+                },
+                {
+                    "groupName": "Miscellaneous",
+                    "emptyLineBefore": "always",
+                    "properties": ["content", "quotes", "counter-reset", "counter-increment", "will-change", "all"]
+                }
+            ],
+            {
+                "unspecified": "bottomAlphabetical"
+            }
+        ]
+    }
+}
