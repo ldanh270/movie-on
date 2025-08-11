@@ -33,5 +33,6 @@
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "typescript.format.insertSpaceAfterCommaDelimiter": true
 }

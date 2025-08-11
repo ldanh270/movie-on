@@ -18,14 +18,14 @@
     "vueIndentScriptAndStyle": false,
 
     "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": [
-    "^(react|react-dom)$",         
-    "^@?\\w",                      
-    "^~/(assets|styles)/.*$",      
-    "^~/.+$",                     
-    "^[./]",                      
-    "^type .*"                    
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+    "importOrder": [
+        "^(react|react-dom)$",
+        "^@?\\w",
+        "^~/(assets|styles)/.*$",
+        "^~/.+$",
+        "^[./]",
+        "^type .*"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
 }
