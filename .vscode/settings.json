@@ -1,13 +1,17 @@
 {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // Editor config
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "files.eol": "\n",
     // Auto convert ~ to src
     "typescript.preferences.importModuleSpecifier": "non-relative",
-    "js/ts.implicitProjectConfig.baseUrl": ".",
-    "js/ts.implicitProjectConfig.paths": {
-        "@/*": ["src/*"]
-    },
+
     // Prettier config
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.tabWidth": 4,
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
         "source.fixAll.eslint": "explicit",
@@ -29,5 +33,6 @@
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "typescript.format.insertSpaceAfterCommaDelimiter": true
 }

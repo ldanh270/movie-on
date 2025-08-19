@@ -1,26 +1,110 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
+/* Use dark mode follow class `.dark` for Tailwind */
+@custom-variant dark (&:is(.dark *));
+
+/* Map token to Tailwind color/radius (Global) */
+@theme {
+    /* Fonts */
+    --font-sans: var(--font-text); /* Body text */
+    --font-title: var(--font-title); /* Heading */
+    --font-accent: var(--font-accent); /* Tagline (Emphasize) */
+
+    /* Colors */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    /* Radius */
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Light mode (Default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Brand */
+    --primary: #ff0000;
+    --primary-foreground: #ffffff;
+
+    /* UI base */
+    --background: #ffffff;
+    --foreground: #212121;
+
+    /* Surfaces */
+    --card: #ffffff;
+    --card-foreground: #212121;
+
+    /* Borders/Input/Ring */
+    --border: hsl(210 15% 85%);
+    --input: hsl(210 15% 85%);
+    --ring: hsl(200 100% 55%);
+
+    /* States */
+    --success: #0acb5b;
+    --warning: #ffb50a;
+    --destructive: #f32424;
+    --info: #00a9ff;
+
+    /* Muted */
+    --muted: #f4f4f5;
+    --muted-foreground: #666666;
+
+    /* Radius base */
+    --radius: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode (Access by add class `.dark` into <html> or <body>) */
+.dark {
+    --primary: #ff0000;
+    --primary-foreground: #ffffff;
+
+    --background: #0d0d0d;
+    --foreground: #e5e5e5;
+
+    --card: #1a1a1a;
+    --card-foreground: #e5e5e5;
+
+    --border: hsl(210 10% 30%);
+    --input: hsl(210 10% 30%);
+    --ring: hsl(200 100% 55%);
+
+    --success: #0acb5b;
+    --warning: #ffb50a;
+    --destructive: #f32424;
+    --info: #00a9ff;
+
+    --muted: #2a2a2a;
+    --muted-foreground: #aaaaaa;
+
+    --radius: 12px;
 }
 
+/* Theme by Broswer/OS system (Optional) */
+/*
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  :root { color-scheme: dark; }
+} */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }

@@ -6,7 +6,7 @@
     "htmlWhitespaceSensitivity": "css",
     "insertPragma": false,
     "jsxSingleQuote": false,
-    "printWidth": 120,
+    "printWidth": 100,
     "proseWrap": "preserve",
     "quoteProps": "as-needed",
     "requirePragma": false,
@@ -18,14 +18,14 @@
     "vueIndentScriptAndStyle": false,
 
     "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": [
-    "^(react|react-dom)$",         
-    "^@?\\w",                      
-    "^~/(assets|styles)/.*$",      
-    "^~/.+$",                     
-    "^[./]",                      
-    "^type .*"                    
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+    "importOrder": [
+        "^(react|react-dom)$",
+        "^@?\\w",
+        "^~/(assets|styles)/.*$",
+        "^~/.+$",
+        "^[./]",
+        "^type .*"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
 }

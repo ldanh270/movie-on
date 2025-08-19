@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MovieOn
+
+A clean, fast online movie UI built with **Next.js 15** and **Tailwind CSS v4**. Focused on modern theming, accessibility, and DX.
+
+## Overview
+
+- Repository: [github/MovieOn](https://github.com/ldanh270/movie-on)
+- Design: [figma/MovieOn](https://www.figma.com/design/JUm0ZPXFneSCVI0kRQNzCX/MovieOn?node-id=20-565&t=OZpMAp3OYFcs1E2M-1)
+- Owner: [ldanh270](https://github.com/ldanh270)
+
+## Features
+
+- Light/Dark theming via CSS variables and Tailwind v4 `@theme`.
+- Dark mode toggle by adding/removing `.dark` on `<html>` (or via a `ThemeProvider`).
+- Semantic color tokens: `background`, `foreground`, `primary`, `muted`, `card`, `border`, `ring`, etc.
+- Google Fonts with `next/font` (title, body, accent).
+- Animations with `tw-animate-css`.
+- App Router structure and SEO-ready metadata.
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- Tailwind CSS v4 (`@import 'tailwindcss'`, `@theme`)
+- TypeScript
+- next/font (Google Fonts)
+
+## Requirements
+
+- Node.js ≥ 18.18
+- pnpm, npm, or yarn
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# clone
+git clone <repo-url>
+cd movieon
+
+# install deps
+pnpm i   # or npm i / yarn
+
+# run dev
+pnpm dev # or npm run dev / yarn dev
+
+# build & start
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `dev` – start Next.js dev server
+- `build` – production build
+- `start` – start production server
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  layout.tsx
+  page.tsx
+components/
+  theme-provider.tsx
+styles/
+  globals.css
+public/
+  logo.svg
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Theming
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tailwind v4 tokens are mapped through `@theme` in `styles/globals.css`.
 
-## Deploy on Vercel
+- Light mode tokens live under `:root`.
+- Dark mode tokens live under `.dark`.
+- Toggle dark by adding/removing `.dark` on `<html>` or `<body>`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Example usage:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```tsx
+<button className="bg-primary text-primary-foreground px-5 py-2 rounded-lg">Watch Now</button>
+```
+
+## Fonts
+
+Configured with `next/font/google` and exposed as CSS variables:
+
+- **Title**: Oswald → `--font-title`
+- **Body**: Source Sans 3 → `--font-text`
+- **Accent**: Montserrat Alternates → `--font-accent`
+
+Attach variables to `<body>` and map to Tailwind via `@theme`.
+
+## Deployment
+
+- Vercel (recommended): connect repository and deploy.
+- Self-host: `pnpm build && pnpm start`.
+
+## Contributing
+
+Issues and PRs are welcome. Please keep commits scoped and descriptive.
+
+## License
+
+MIT © <your-name>
