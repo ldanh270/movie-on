@@ -1,3 +1,4 @@
+import Header from '@/components/layout/header'
 import { ThemeProvider } from '@/components/theme-provider'
 
 import type { Metadata } from 'next'
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${text.variable} ${title.variable} min-h-dvh bg-background text-foreground antialiased`}
+                className={`${text.variable} ${title.variable} ${accent.variable} min-h-dvh bg-background text-foreground antialiased`}
             >
                 <ThemeProvider
                     attribute="class"
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     disableTransitionOnChange
                     storageKey="movieon-theme" // Optional: Save theme in localStorage
                 >
+                    <Header />
                     {children}
                 </ThemeProvider>
             </body>

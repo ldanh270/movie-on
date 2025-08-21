@@ -94,11 +94,13 @@
     --radius: 12px;
 }
 
-/* Theme by Broswer/OS system (Optional) */
-/*
+/* Theme by Broswer/OS system */
+
 @media (prefers-color-scheme: dark) {
-  :root { color-scheme: dark; }
-} */
+    :root {
+        color-scheme: dark;
+    }
+}
 
 @layer base {
     * {
