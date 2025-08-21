@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const HeaderNavbar = () => {
+const Navbar = () => {
     const [pageLink, setPageLink] = useState(usePathname)
 
     // Path list in navbar
@@ -24,7 +24,9 @@ const HeaderNavbar = () => {
                         <Link
                             href={page.href}
                             onClick={() => setPageLink(page.href)}
-                            className={`${page.href === pageLink && 'font-bold'} pb-2 hover:border-b-2 hover:border-primary`}
+                            className={`${page.href === pageLink && 'font-bold'} relative pb-1 bg-gradient-to-r
+              from-primary to-primary  bg-[length:0%_2px] bg-bottom bg-no-repeat
+               transition-all duration-300 hover:bg-[length:100%_2px]`}
                         >
                             {page.label}
                         </Link>
@@ -34,4 +36,4 @@ const HeaderNavbar = () => {
         </ul>
     )
 }
-export default HeaderNavbar
+export default Navbar
