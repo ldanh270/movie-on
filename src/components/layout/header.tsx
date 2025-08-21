@@ -1,5 +1,5 @@
 import { ModeToggle } from '@/components/header/mode-toggle'
-import HeaderNavbar from '@/components/header/navbar'
+import Navbar from '@/components/header/navbar'
 import SearchBox from '@/components/header/search-box'
 
 import Image from 'next/image'
@@ -24,7 +24,7 @@ const Header = () => {
                 </div>
             </Link>
             {/* navbar */}
-            <HeaderNavbar />
+            <Navbar />
 
             <div className="**:cursor-pointer flex justify-center items-center">
                 <SearchBox />

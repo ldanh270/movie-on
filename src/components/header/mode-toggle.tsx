@@ -18,6 +18,7 @@ export function ModeToggle() {
 
     return (
         <DropdownMenu>
+            {/* Toggle button */}
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                     <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
@@ -25,7 +26,11 @@ export function ModeToggle() {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            {/* Theme options */}
+            <DropdownMenuContent
+                align="end"
+                className="bg-background *:px-3 *:py-2 *:text-sm *:hover:bg-gray-100 *:dark:hover:bg-gray-800 *:hover:text-primary *:cursor-pointer"
+            >
                 <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
