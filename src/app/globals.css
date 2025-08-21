@@ -18,6 +18,9 @@
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
 
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
 
@@ -37,22 +40,26 @@
 
 /* Light mode (Default) */
 :root {
-    /* Brand */
+    /* Primary */
     --primary: #ff0000;
     --primary-foreground: #ffffff;
+
+    /* Secondary */
+    --secondary: #e5e5e5;
+    --secondary-foreground: #1a1a1a;
 
     /* UI base */
     --background: #ffffff;
     --foreground: #212121;
 
-    /* Surfaces */
+    /* Card */
     --card: #ffffff;
     --card-foreground: #212121;
 
     /* Borders/Input/Ring */
-    --border: hsl(210 15% 85%);
-    --input: hsl(210 15% 85%);
-    --ring: hsl(200 100% 55%);
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #e5e5e5;
 
     /* States */
     --success: #0acb5b;
@@ -64,33 +71,44 @@
     --muted: #f4f4f5;
     --muted-foreground: #666666;
 
-    /* Radius base */
+    /* Radius */
     --radius: 12px;
 }
 
 /* Dark mode (Access by add class `.dark` into <html> or <body>) */
 .dark {
+    /* Primary */
     --primary: #ff0000;
     --primary-foreground: #ffffff;
 
+    /* Secondary */
+    --secondary: #2a2a2a;
+    --secondary-foreground: #f5f5f5;
+
+    /* UI base */
     --background: #0d0d0d;
     --foreground: #e5e5e5;
 
+    /* Card */
     --card: #1a1a1a;
     --card-foreground: #e5e5e5;
 
+    /* Borders/Input/Ring */
     --border: hsl(210 10% 30%);
     --input: hsl(210 10% 30%);
     --ring: hsl(200 100% 55%);
 
+    /* States */
     --success: #0acb5b;
     --warning: #ffb50a;
     --destructive: #f32424;
     --info: #00a9ff;
 
+    /* Muted */
     --muted: #2a2a2a;
     --muted-foreground: #aaaaaa;
 
+    /* Radius */
     --radius: 12px;
 }
 
