@@ -26,7 +26,7 @@ const Header = () => {
             {/* navbar */}
             <Navbar />
 
-            <div className="**:cursor-pointer flex justify-center items-center">
+            <div className="flex justify-center items-center gap-1">
                 <SearchBox />
                 <ModeToggle />
             </div>
