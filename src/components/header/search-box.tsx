@@ -105,7 +105,7 @@ export default function SearchBox() {
                     }}
                     onKeyDown={onKeyDown}
                     placeholder="Search movies..."
-                    className="h-10 flex-1 border-0 rounded-full pl-4 pr-2 focus-visible:ring-0"
+                    className="h-10 flex-1 border-0 rounded-full pl-4 pr-2 focus-visible:ring-1 focus:bg-input"
                 />
             </form>
 

@@ -24,9 +24,6 @@
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
 
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -45,19 +42,15 @@
     --primary-foreground: #ffffff;
 
     /* Secondary */
-    --secondary: #e5e5e5;
+    --secondary: #d3d3d3;
     --secondary-foreground: #1a1a1a;
 
     /* UI base */
     --background: #ffffff;
     --foreground: #212121;
 
-    /* Card */
-    --card: #ffffff;
-    --card-foreground: #212121;
-
     /* Borders/Input/Ring */
-    --border: #e5e5e5;
+    --border: #d3d3d3;
     --input: #e5e5e5;
     --ring: #e5e5e5;
 
