@@ -6,7 +6,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
-    const [pageLink, setPageLink] = useState(usePathname)
+    // Path of default page (Before navigation)
+    const path = usePathname()
+    // Path of current page (After navigation)
+    const [pageLink, setPageLink] = useState(path)
 
     // Path list in navbar
     const pages = [
