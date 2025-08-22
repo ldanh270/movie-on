@@ -42,17 +42,17 @@
     --primary-foreground: #ffffff;
 
     /* Secondary */
-    --secondary: #d3d3d3;
-    --secondary-foreground: #1a1a1a;
+    --secondary: #737373;
+    --secondary-foreground: #f5f5f5;
 
     /* UI base */
     --background: #ffffff;
     --foreground: #212121;
 
     /* Borders/Input/Ring */
-    --border: #d3d3d3;
-    --input: #e5e5e5;
-    --ring: #e5e5e5;
+    --border: #737373;
+    --input: #f1f1f1;
+    --ring: #737373;
 
     /* States */
     --success: #0acb5b;
@@ -75,21 +75,17 @@
     --primary-foreground: #ffffff;
 
     /* Secondary */
-    --secondary: #2a2a2a;
-    --secondary-foreground: #f5f5f5;
+    --secondary: #2b2b2b;
+    --secondary-foreground: #ededed;
 
     /* UI base */
-    --background: #0d0d0d;
-    --foreground: #e5e5e5;
-
-    /* Card */
-    --card: #1a1a1a;
-    --card-foreground: #e5e5e5;
+    --background: #0a0a0a;
+    --foreground: #e6e6e6;
 
     /* Borders/Input/Ring */
-    --border: hsl(210 10% 30%);
-    --input: hsl(210 10% 30%);
-    --ring: hsl(200 100% 55%);
+    --border: #262626;
+    --input: #141414;
+    --ring: #3f3f46;
 
     /* States */
     --success: #0acb5b;
@@ -98,8 +94,8 @@
     --info: #00a9ff;
 
     /* Muted */
-    --muted: #2a2a2a;
-    --muted-foreground: #aaaaaa;
+    --muted: #171717;
+    --muted-foreground: #9ca3af;
 
     /* Radius */
     --radius: 12px;
