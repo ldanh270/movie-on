@@ -83,9 +83,9 @@
     --foreground: #e6e6e6;
 
     /* Borders/Input/Ring */
-    --border: #262626;
-    --input: #262626;
-    --ring: #3f3f46;
+    --border: #737373;
+    --input: #101828;
+    --ring: #737373;
 
     /* States */
     --success: #0acb5b;

@@ -95,7 +95,7 @@ export default function SearchBox() {
         <div ref={rootRef} className="relative w-full max-w-md">
             <form
                 onSubmit={onSubmit}
-                className="flex h-10 items-center rounded-full border bg-card overflow-hidden"
+                className="flex items-center rounded-full border focus-within:bg-input "
             >
                 <Input
                     value={query}
@@ -105,12 +105,12 @@ export default function SearchBox() {
                     }}
                     onKeyDown={onKeyDown}
                     placeholder="Search movies..."
-                    className="h-10 flex-1 border rounded-full pl-4 pr-2 focus-visible:ring-1 focus:bg-input"
+                    className=" flex-1 rounded-full pl-4 pr-2 border-0"
                 />
             </form>
 
             {query && (
-                <div className="absolute mt-2 w-full rounded-xl border bg-background shadow-lg z-30">
+                <div className="absolute p-2 mt-2 w-full rounded-xl border bg-background shadow-lg z-30">
                     {suggestions.length === 0 ? (
                         <div className="px-3 py-2 text-sm text-muted-foreground">No results</div>
                     ) : (
@@ -118,7 +118,7 @@ export default function SearchBox() {
                             <button
                                 key={movie.id}
                                 type="button"
-                                className={`w-full px-3 py-2 text-left text-sm hover:bg-accent
+                                className={`w-full px-3 py-2 text-left text-sm hover:bg-input hover:rounded-md
                   ${i === activeIndex ? 'bg-accent text-accent-foreground' : ''}`}
                                 onClick={() => performSearch(movie.title)}
                                 onMouseEnter={() => setActiveIndex(i)}
