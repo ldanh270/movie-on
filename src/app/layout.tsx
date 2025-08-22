@@ -1,8 +1,9 @@
+import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
 import { ThemeProvider } from '@/components/theme-provider'
 
 import type { Metadata } from 'next'
-import { Montserrat_Alternates, Oswald, Source_Sans_3 } from 'next/font/google'
+import { Manrope, Montserrat_Alternates, Oswald, Source_Sans_3 } from 'next/font/google'
 
 import './globals.css'
 
@@ -27,6 +28,13 @@ export const accent = Montserrat_Alternates({
     variable: '--font-accent',
 })
 
+export const footer = Manrope({
+    subsets: ['latin', 'vietnamese'],
+    weight: ['500', '600', '700'],
+    display: 'swap',
+    variable: '--font-footer',
+})
+
 export const metadata: Metadata = {
     title: 'MovieOn',
     description: 'An online cinema website. Create by ldanh270',
@@ -37,17 +45,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${text.variable} ${title.variable} ${accent.variable} min-h-dvh bg-background text-foreground antialiased`}
+                className={`${text.variable} ${title.variable} ${accent.variable} ${footer.variable} min-h-dvh bg-background text-foreground antialiased`}
             >
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="light"
                     enableSystem
                     disableTransitionOnChange
-                    storageKey="movieon-theme" // Optional: Save theme in localStorage
+                    storageKey="movie-on-theme" // Optional: Save theme in localStorage
                 >
-                    <Header />
-                    {children}
+                    <div className="h-dvh flex flex-col justify-between gap-0">
+                        <Header />
+                        <div id="content" className="h-auto flex-1">
+                            {children}
+                        </div>
+                        <Footer />
+                    </div>
                 </ThemeProvider>
             </body>
         </html>
