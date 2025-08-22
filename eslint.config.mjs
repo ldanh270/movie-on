@@ -36,5 +36,5 @@ export default tseslint.config([
             indent: ['error', 4, { SwitchCase: 1 }], // Tab size = 4 spaces
         },
     },
-    { ignores: ['.next/**', 'node_modules/**', 'dist/**'] }, // Ignore build
+    { ignores: ['.next/**', 'node_modules/**', 'dist/**', 'bun.lockb', 'bun.lock'] }, // Ignore build
 ])
