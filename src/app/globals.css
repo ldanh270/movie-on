@@ -47,7 +47,7 @@
 
     /* UI base */
     --background: #ffffff;
-    --foreground: #212121;
+    --foreground: #0f0f0f;
 
     /* Borders/Input/Ring */
     --border: #737373;
@@ -72,19 +72,19 @@
 .dark {
     /* Primary */
     --primary: #ff0000;
-    --primary-foreground: #ffffff;
+    --primary-foreground: #0f0f0f;
 
     /* Secondary */
-    --secondary: #2b2b2b;
-    --secondary-foreground: #ededed;
+    --secondary: #999999;
+    --secondary-foreground: #ffffff;
 
     /* UI base */
-    --background: #0a0a0a;
+    --background: #0f0f0f;
     --foreground: #e6e6e6;
 
     /* Borders/Input/Ring */
     --border: #262626;
-    --input: #141414;
+    --input: #262626;
     --ring: #3f3f46;
 
     /* States */
