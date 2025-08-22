@@ -21,7 +21,7 @@ export function ModeToggle() {
             {/* Toggle button */}
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="ghost"
+                    variant="outline"
                     size="icon"
                     className="cursor-pointer border hover:bg-input"
                 >
