@@ -1,15 +1,9 @@
-'use client'
-
-import { useState } from 'react'
-
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
     // Path of default page (Before navigation)
     const path = usePathname()
-    // Path of current page (After navigation)
-    const [pageLink, setPageLink] = useState(path)
 
     // Path list in navbar
     const pages = [
@@ -26,8 +20,7 @@ const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
                     <li key={page.href}>
                         <Link
                             href={page.href}
-                            onClick={() => setPageLink(page.href)}
-                            className={`${page.href === pageLink && 'font-bold'} relative pb-1 bg-gradient-to-r
+                            className={`${page.href === path && 'font-bold'} relative pb-1 bg-gradient-to-r
               from-primary to-primary  bg-[length:0%_2px] bg-bottom bg-no-repeat
                transition-all duration-300 hover:bg-[length:100%_2px]`}
                         >
