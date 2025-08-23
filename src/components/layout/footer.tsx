@@ -1,4 +1,8 @@
+import Facebook from '@/assets/svg/social-icons/facebook-icon.svg'
+import Github from '@/assets/svg/social-icons/github-icon.svg'
+import LinkedIn from '@/assets/svg/social-icons/linkedin-icon.svg'
 import { Button } from '@/components/ui/button'
+import { SvgIcon } from '@/types/common'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,30 +23,31 @@ const aboutContent: { label: string; details: string }[] = [
     },
 ]
 
-// Links for Connect with me section
+// Links for "Connect with me" section
 const connectContent: {
     label: string
-    icon: string
+    icon: SvgIcon
     link: string
 }[] = [
     {
         label: 'Facebook',
-        icon: '/social-icons/facebook-icon.svg',
+        icon: Facebook,
         link: 'https://www.facebook.com/ldanh270',
     },
     {
         label: 'Github',
-        icon: '/social-icons/github-icon.svg',
+        icon: Github,
         link: 'https://github.com/ldanh270',
     },
     {
         label: 'LinkedIn',
-        icon: '/social-icons/linkedin-icon.svg',
+        icon: LinkedIn,
         link: 'https://www.linkedin.com/in/ldanh270/',
     },
 ]
 
 export default function Footer() {
+    console.log('Type of icon:', Facebook)
     return (
         <div className="w-full flex flex-col border-t p-5 gap-5 h-fit">
             <div id="contacts" className="contacts w-full flex flex-row justify-between">
@@ -75,21 +80,14 @@ export default function Footer() {
                         Connect with me
                     </div>
                     <div id="icons" className="flex flex-row gap-3.5">
-                        {connectContent.map(({ label, icon, link }) => (
+                        {connectContent.map(({ label, icon: Icon, link }) => (
                             <Button asChild key={label} variant="ghost" size="icon">
                                 <Link
                                     href={link}
                                     target="_blank"
                                     className="size-14 border hover:bg-input"
                                 >
-                                    <Image
-                                        src={icon}
-                                        alt="Logo"
-                                        width={24}
-                                        height={24}
-                                        quality={100}
-                                        className="fill-foreground"
-                                    />
+                                    <Icon className="fill-foreground size-auto" />
                                 </Link>
                             </Button>
                         ))}
