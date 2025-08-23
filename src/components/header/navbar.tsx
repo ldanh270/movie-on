@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const Navbar = () => {
+const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
     // Path of default page (Before navigation)
     const path = usePathname()
     // Path of current page (After navigation)
@@ -20,7 +20,7 @@ const Navbar = () => {
     ]
 
     return (
-        <ul className="navbar flex flex-row justify-between gap-8 items-center">
+        <ul className={vertical ? 'flex flex-col gap-1 p-2' : 'flex flex-row gap-8 items-center'}>
             {pages.map((page) => {
                 return (
                     <li key={page.href}>
