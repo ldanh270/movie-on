@@ -5,7 +5,8 @@ export default function Logo() {
     return (
         <Link
             href="/"
-            className="logo flex flex-row justify-around items-center gap-4 select-none"
+            className="justify-start
+            logo flex flex-row md:justify-around items-center gap-1 select-none"
             aria-disabled
         >
             <Image
@@ -17,7 +18,7 @@ export default function Logo() {
                 className="fill-primary"
             />
             <div className="font-title text-2xl">
-                <span className="">Movie</span>
+                <span className="text-foreground">Movie</span>
                 <span className="text-primary">On</span>
             </div>
         </Link>
