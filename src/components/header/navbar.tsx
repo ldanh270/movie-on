@@ -1,9 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
     // Path of default page (Before navigation)
-    const path = usePathname()
+    const path: string = usePathname()
 
     // Path list in navbar
     const pages = [

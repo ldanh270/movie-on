@@ -1,5 +1,3 @@
-'use client'
-
 import Logo from '@/components/header/logo'
 import { ModeToggle } from '@/components/header/mode-toggle'
 import Navbar from '@/components/header/navbar'
@@ -7,16 +5,11 @@ import SearchBox from '@/components/header/search-box'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-import { useState } from 'react'
-
 import { Menu } from 'lucide-react'
 
 const Header = () => {
-    // Toggle header
-    const [isOpen, setIsOpen] = useState(false)
-
     return (
-        <header className="w-dvw flex flex-row items-center justify-around border-b-1 py-2.5">
+        <header className="sticky top-0 z-50 w-full flex flex-row items-center justify-around border-b py-2.5">
             <div className="container mx-auto flex h-14 w-full items-center justify-between px-3">
                 <Logo />
                 <Sheet>
@@ -29,12 +22,12 @@ const Header = () => {
                     <SheetContent
                         side="left"
                         className="fixed w-[70vw] p-0 h-[100vh] flex flex-col justify-start gap-0
-                [&>button]:size-14 [&>button]:right-0 [&>button]:top-2.5
-                [&>button]:*:border [&>button]:*:flex [&>button]:*:items-center [&>button]:*:justify-center [&>button]:*:rounded-sm"
+                SheetClose:size-14 SheetClose:right-0 SheetClose:top-2.5
+                SheetClose:*:border SheetClose:*:flex SheetClose:*:items-center SheetClose:*:justify-center SheetClose:*:rounded-sm"
                     >
                         <SheetHeader>
                             <SheetTitle>
-                                <Logo />
+                                <Logo aria-hidden />
                             </SheetTitle>
                         </SheetHeader>
                         <div className="h-dvh p-3 flex flex-col justify-between">
