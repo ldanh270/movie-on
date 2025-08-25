@@ -1,9 +1,7 @@
-import Image from 'next/image'
+import Slideshow from "@/components/home/slideshow"
+
+import Image from "next/image"
 
 export default function Home() {
-    return (
-        <div>
-            <h1 className="font-sans text-xl">Homepage</h1>
-        </div>
-    )
+    return <section className="h-full w-dvw">Header</section>
 }

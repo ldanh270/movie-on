@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 /* Use dark mode follow class `.dark` for Tailwind */
 @custom-variant dark (&:is(.dark *));
@@ -105,6 +105,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        box-sizing: border-box;
         color-scheme: dark;
     }
 }

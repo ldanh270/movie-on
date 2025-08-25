@@ -1,28 +1,28 @@
-'use client'
+"use client"
 
-import { Input } from '@/components/ui/input'
+import { Input } from "@/components/ui/input"
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from "react"
 
 type Movie = { id: number; title: string; year: number }
 
 const DEMO_MOVIES: Movie[] = [
-    { id: 1, title: 'Inception', year: 2010 },
-    { id: 2, title: 'Interstellar', year: 2014 },
-    { id: 3, title: 'Oppenheimer', year: 2023 },
-    { id: 4, title: 'The Dark Knight', year: 2008 },
+    { id: 1, title: "Inception", year: 2010 },
+    { id: 2, title: "Interstellar", year: 2014 },
+    { id: 3, title: "Oppenheimer", year: 2023 },
+    { id: 4, title: "The Dark Knight", year: 2008 },
 ]
 
 // Normalize search query
 const normalizeText = (text: string) =>
     text
         .toLowerCase()
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '')
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
 
 export default function SearchBox() {
     // Search query (Search input value)
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState("")
     // On selected suggestion (Hover, Selected by arrow)
     const [activeIndex, setActiveIndex] = useState(-1)
     // Detect click outsize
@@ -40,7 +40,7 @@ export default function SearchBox() {
         // Reset selected suggestion
         setActiveIndex(-1)
         // Reset query (Input value)
-        setQuery('')
+        setQuery("")
     }
 
     // Reset querry & selected suggestion
@@ -50,8 +50,8 @@ export default function SearchBox() {
                 resetInput()
             }
         }
-        document.addEventListener('pointerdown', onClickOutside)
-        return () => document.removeEventListener('pointerdown', onClickOutside)
+        document.addEventListener("pointerdown", onClickOutside)
+        return () => document.removeEventListener("pointerdown", onClickOutside)
     }, [])
 
     // TODO: perform when searching
@@ -71,21 +71,21 @@ export default function SearchBox() {
 
     // Handle keydown behaviors
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Escape') {
+        if (e.key === "Escape") {
             setActiveIndex(-1)
-            setQuery('')
+            setQuery("")
             return
         }
         if (!suggestions.length) return
-        if (e.key === 'ArrowDown') {
+        if (e.key === "ArrowDown") {
             e.preventDefault()
             setActiveIndex((i) => (i + 1) % suggestions.length)
         }
-        if (e.key === 'ArrowUp') {
+        if (e.key === "ArrowUp") {
             e.preventDefault()
             setActiveIndex((i) => (i - 1 + suggestions.length) % suggestions.length)
         }
-        if (e.key === 'Enter' && activeIndex >= 0) {
+        if (e.key === "Enter" && activeIndex >= 0) {
             e.preventDefault()
             performSearch(suggestions[activeIndex].title)
         }
@@ -95,7 +95,7 @@ export default function SearchBox() {
         <div ref={rootRef} className="relative w-full max-w-md">
             <form
                 onSubmit={onSubmit}
-                className="flex items-center rounded-full border focus-within:bg-input "
+                className="focus-within:bg-input flex items-center rounded-full border"
             >
                 <Input
                     value={query}
@@ -105,21 +105,20 @@ export default function SearchBox() {
                     }}
                     onKeyDown={onKeyDown}
                     placeholder="Search movies..."
-                    className=" flex-1 rounded-full pl-4 pr-2 border-0"
+                    className="flex-1 rounded-full border-0 pr-2 pl-4"
                 />
             </form>
 
             {query && (
-                <div className="absolute p-2 mt-2 w-full rounded-xl border bg-background shadow-lg z-30">
+                <div className="bg-background absolute z-30 mt-2 w-full rounded-xl border p-2 shadow-lg">
                     {suggestions.length === 0 ? (
-                        <div className="px-3 py-2 text-sm text-muted-foreground">No results</div>
+                        <div className="text-muted-foreground px-3 py-2 text-sm">No results</div>
                     ) : (
                         suggestions.map((movie, i) => (
                             <button
                                 key={movie.id}
                                 type="button"
-                                className={`w-full px-3 py-2 text-left text-sm hover:bg-input hover:rounded-md
-                  ${i === activeIndex ? 'bg-accent text-accent-foreground' : ''}`}
+                                className={`hover:bg-input w-full px-3 py-2 text-left text-sm hover:rounded-md ${i === activeIndex ? "bg-accent text-accent-foreground" : ""}`}
                                 onClick={() => performSearch(movie.title)}
                                 onMouseEnter={() => setActiveIndex(i)}
                             >

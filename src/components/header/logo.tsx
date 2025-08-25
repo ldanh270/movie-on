@@ -1,12 +1,11 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Logo() {
     return (
         <Link
             href="/"
-            className="justify-start
-            logo flex flex-row md:justify-around items-center gap-1 select-none"
+            className="logo flex flex-row items-center justify-start gap-1 select-none md:justify-around"
             aria-disabled
         >
             <Image
