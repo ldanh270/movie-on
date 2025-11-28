@@ -52,6 +52,16 @@ const nextConfig: NextConfig = {
 
         return config
     },
+
+    // Image configuration - cho phép load images từ external domains
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "*",
+            },
+        ],
+    },
 }
 
 export default nextConfig
