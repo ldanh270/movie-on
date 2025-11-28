@@ -44,7 +44,7 @@ const connectContent: {
 
 export default function Footer() {
     return (
-        <div className="bg-background flex h-auto w-dvw flex-col gap-5 border-t p-5">
+        <div className="bg-background flex h-auto w-full flex-col gap-5 border-t p-5">
             <div
                 id="contacts"
                 className="contacts flex w-full flex-col items-center gap-5 md:flex-row md:justify-between"

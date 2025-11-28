@@ -115,6 +115,35 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground overflow-x-hidden;
+    }
+    html {
+        @apply overflow-x-hidden;
+    }
+}
+
+@layer utilities {
+    /* Ẩn scrollbar */
+    .hide-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Scrollbar mỏng (alternative) */
+    .thin-scrollbar {
+        scrollbar-width: thin;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-border rounded-full;
     }
 }

@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${text.variable} ${title.variable} ${accent.variable} ${footer.variable} bg-background text-foreground min-h-dvh antialiased`}
+                className={`${text.variable} ${title.variable} ${accent.variable} ${footer.variable} bg-background text-foreground hide-scrollbar min-h-dvh antialiased`}
                 suppressHydrationWarning
             >
                 <ThemeProvider
@@ -53,14 +53,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     defaultTheme="light"
                     enableSystem
                     disableTransitionOnChange
-                    storageKey="movie-on-theme" // Optional: Save theme in localStorage
+                    storageKey="movie-on-theme"
                 >
-                    <div className="flex h-dvh flex-col justify-between gap-0 overflow-x-hidden">
+                    <div className="flex h-dvh flex-col justify-between gap-0">
                         <Header />
-                        <div id="content" className="h-auto w-full flex-1">
+                        <div
+                            id="content"
+                            className="hide-scrollbar relative h-auto w-full flex-1 overflow-y-auto"
+                        >
                             {children}
+                            <Footer />
                         </div>
-                        <Footer />
                     </div>
                 </ThemeProvider>
             </body>
