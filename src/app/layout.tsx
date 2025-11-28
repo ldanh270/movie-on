@@ -46,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <body
                 className={`${text.variable} ${title.variable} ${accent.variable} ${footer.variable} bg-background text-foreground min-h-dvh antialiased`}
+                suppressHydrationWarning
             >
                 <ThemeProvider
                     attribute="class"
