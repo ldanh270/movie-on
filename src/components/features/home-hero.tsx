@@ -14,6 +14,8 @@ import Image from "next/image"
  * - Single Responsibility: Hiển thị featured movie hero section
  * - Open/Closed: Có thể extend qua className prop
  * - Interface Segregation: Props rõ ràng, minimal
+ *
+ * Note: Thêm suppressHydrationWarning để tránh warning với dynamic content
  */
 interface HomeHeroProps {
     movie: Movie
@@ -22,7 +24,10 @@ interface HomeHeroProps {
 
 export function HomeHero({ movie, className }: HomeHeroProps) {
     return (
-        <section className={cn("relative h-[70vh] w-full overflow-hidden", className)}>
+        <section
+            className={cn("relative h-[70vh] w-full overflow-hidden", className)}
+            suppressHydrationWarning
+        >
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image

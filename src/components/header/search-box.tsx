@@ -1,49 +1,54 @@
 "use client"
 
 import { Input } from "@/components/ui/input"
+import { MovieService } from "@/services/movie.service"
+import { Movie } from "@/types/movie"
 
 import { useEffect, useMemo, useRef, useState } from "react"
 
-type Movie = { id: number; title: string; year: number }
-
-const DEMO_MOVIES: Movie[] = [
-    { id: 1, title: "Inception", year: 2010 },
-    { id: 2, title: "Interstellar", year: 2014 },
-    { id: 3, title: "Oppenheimer", year: 2023 },
-    { id: 4, title: "The Dark Knight", year: 2008 },
-]
-
-// Normalize search query
-const normalizeText = (text: string) =>
-    text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/\p{Diacritic}/gu, "")
-
+/**
+ * SearchBox Component - với Real-time search
+ *
+ * SOLID Principles:
+ * - Single Responsibility: Chỉ quản lý search UI và logic
+ * - Dependency Inversion: Phụ thuộc vào MovieService
+ */
 export default function SearchBox() {
-    // Search query (Search input value)
     const [query, setQuery] = useState("")
-    // On selected suggestion (Hover, Selected by arrow)
     const [activeIndex, setActiveIndex] = useState(-1)
-    // Detect click outsize
+    const [suggestions, setSuggestions] = useState<Movie[]>([])
+    const [isLoading, setIsLoading] = useState(false)
     const rootRef = useRef<HTMLDivElement>(null)
 
-    // Suggestion by search query
-    const suggestions = useMemo(() => {
-        const cleaned = query.trim()
-        if (!cleaned) return []
-        const nq = normalizeText(cleaned)
-        return DEMO_MOVIES.filter((m) => normalizeText(m.title).includes(nq)).slice(0, 8)
+    // Debounce search
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(async () => {
+            if (query.trim().length < 2) {
+                setSuggestions([])
+                return
+            }
+
+            setIsLoading(true)
+            try {
+                const results = await MovieService.searchMovies(query, 8)
+                setSuggestions(results)
+            } catch (error) {
+                console.error("Search error:", error)
+                setSuggestions([])
+            } finally {
+                setIsLoading(false)
+            }
+        }, 300) // Debounce 300ms
+
+        return () => clearTimeout(delayDebounceFn)
     }, [query])
 
     const resetInput = () => {
-        // Reset selected suggestion
         setActiveIndex(-1)
-        // Reset query (Input value)
         setQuery("")
+        setSuggestions([])
     }
 
-    // Reset querry & selected suggestion
     useEffect(() => {
         const onClickOutside = (e: PointerEvent) => {
             if (!rootRef.current?.contains(e.target as Node)) {
@@ -54,26 +59,23 @@ export default function SearchBox() {
         return () => document.removeEventListener("pointerdown", onClickOutside)
     }, [])
 
-    // TODO: perform when searching
     const performSearch = (val: string) => {
-        const query = val.trim()
-        if (!query) return
-        // TODO: call API search(q)
+        const searchQuery = val.trim()
+        if (!searchQuery) return
+        // TODO: Navigate to search results page
+        console.log("Search for:", searchQuery)
         resetInput()
     }
 
-    // TODO: Handle when submit search query (to search)
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (activeIndex >= 0) performSearch(suggestions[activeIndex].title)
         else performSearch(query)
     }
 
-    // Handle keydown behaviors
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Escape") {
-            setActiveIndex(-1)
-            setQuery("")
+            resetInput()
             return
         }
         if (!suggestions.length) return
@@ -109,9 +111,11 @@ export default function SearchBox() {
                 />
             </form>
 
-            {query && (
+            {query.trim().length >= 2 && (
                 <div className="bg-background absolute z-30 mt-2 w-full rounded-xl border p-2 shadow-lg">
-                    {suggestions.length === 0 ? (
+                    {isLoading ? (
+                        <div className="text-muted-foreground px-3 py-2 text-sm">Searching...</div>
+                    ) : suggestions.length === 0 ? (
                         <div className="text-muted-foreground px-3 py-2 text-sm">No results</div>
                     ) : (
                         suggestions.map((movie, i) => (
@@ -122,7 +126,10 @@ export default function SearchBox() {
                                 onClick={() => performSearch(movie.title)}
                                 onMouseEnter={() => setActiveIndex(i)}
                             >
-                                {movie.title}
+                                <div className="font-medium">{movie.title}</div>
+                                <div className="text-muted-foreground text-xs">
+                                    {movie.releaseYear} • {movie.genre.slice(0, 2).join(", ")}
+                                </div>
                             </button>
                         ))
                     )}

@@ -55,9 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     disableTransitionOnChange
                     storageKey="movie-on-theme" // Optional: Save theme in localStorage
                 >
-                    <div className="flex h-dvh flex-col justify-between gap-0">
+                    <div className="flex h-dvh flex-col justify-between gap-0 overflow-x-hidden">
                         <Header />
-                        <div id="content" className="h-auto flex-1">
+                        <div id="content" className="h-auto w-full flex-1">
                             {children}
                         </div>
                         <Footer />
