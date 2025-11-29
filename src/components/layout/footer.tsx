@@ -1,21 +1,20 @@
-import Facebook from '@/assets/svg/social-icons/facebook-icon.svg'
-import Github from '@/assets/svg/social-icons/github-icon.svg'
-import LinkedIn from '@/assets/svg/social-icons/linkedin-icon.svg'
-import { Button } from '@/components/ui/button'
-import { SvgIcon } from '@/types/common'
+import Facebook from "@/assets/svg/social-icons/facebook-icon.svg"
+import Github from "@/assets/svg/social-icons/github-icon.svg"
+import LinkedIn from "@/assets/svg/social-icons/linkedin-icon.svg"
+import { Button } from "@/components/ui/button"
+import { SvgIcon } from "@/types/common"
 
-import Image from 'next/image'
-import Link from 'next/link'
+import Link from "next/link"
 
 // Contents for About me section
 const aboutContent: { label: string; details: string }[] = [
     {
-        label: 'Email',
-        details: 'ducanhle.dn@gmail.com',
+        label: "Email",
+        details: "ducanhle.dn@gmail.com",
     },
     {
-        label: 'Phone',
-        details: '+84 905 944 716',
+        label: "Phone",
+        details: "+84 905 944 716",
     },
 ]
 
@@ -26,36 +25,33 @@ const connectContent: {
     link: string
 }[] = [
     {
-        label: 'Facebook',
+        label: "Facebook",
         icon: Facebook,
-        link: 'https://www.facebook.com/ldanh270',
+        link: "https://www.facebook.com/ldanh270",
     },
     {
-        label: 'Github',
+        label: "Github",
         icon: Github,
-        link: 'https://github.com/ldanh270',
+        link: "https://github.com/ldanh270",
     },
     {
-        label: 'LinkedIn',
+        label: "LinkedIn",
         icon: LinkedIn,
-        link: 'https://www.linkedin.com/in/ldanh270/',
+        link: "https://www.linkedin.com/in/ldanh270/",
     },
 ]
 
 export default function Footer() {
     return (
-        <div className="w-dvw h-auto flex flex-col border-t p-5 gap-5">
+        <div className="bg-background flex h-auto w-full flex-col gap-5 border-t p-5">
             <div
                 id="contacts"
-                className="contacts w-full flex 
-                flex-col items-center gap-5 
-                md:flex-row md:justify-between"
+                className="contacts flex w-full flex-col items-center gap-5 md:flex-row md:justify-between"
             >
-                <div id="about_me" className="w-full flex flex-col gap-5">
+                <div id="about_me" className="flex w-full flex-col gap-5">
                     <div
                         id="about-title"
-                        className="self-center
-                        md:self-start font-footer font-semibold text-2xl select-none"
+                        className="font-footer select-none self-center text-2xl font-semibold md:self-start"
                     >
                         About me
                     </div>
@@ -64,20 +60,10 @@ export default function Footer() {
                             return (
                                 <div
                                     key={label}
-                                    className="w-full flex flex-row *:font-footer *:text-secondary"
+                                    className="*:font-footer *:text-secondary flex w-full flex-row"
                                 >
-                                    <span
-                                        className="w-20 
-                                    md:w-20 select-none"
-                                    >
-                                        {label}
-                                    </span>
-                                    <span
-                                        className="w-full
-                                    md:w-64"
-                                    >
-                                        {details}
-                                    </span>
+                                    <span className="w-20 select-none md:w-20">{label}</span>
+                                    <span className="w-full md:w-64">{details}</span>
                                 </div>
                             )
                         })}
@@ -85,11 +71,9 @@ export default function Footer() {
                 </div>
                 <div
                     id="connect_with_me"
-                    className="flex flex-col items-center font-footer font-semibold text-2xl gap-5
-                    w-full border-t justify-center pt-5
-                    md:w-fit md:border-0 md:pt-0"
+                    className="font-footer flex w-full flex-col items-center justify-center gap-5 border-t pt-5 text-2xl font-semibold md:w-fit md:border-0 md:pt-0"
                 >
-                    <div id="connect-title" className="text-center select-none">
+                    <div id="connect-title" className="select-none text-center">
                         Connect with me
                     </div>
                     <div id="icons" className="flex flex-row gap-3.5">
@@ -98,7 +82,7 @@ export default function Footer() {
                                 <Link
                                     href={link}
                                     target="_blank"
-                                    className="size-14 border hover:bg-input"
+                                    className="hover:bg-input size-14 border"
                                 >
                                     <Icon className="fill-foreground size-auto" />
                                 </Link>
@@ -109,25 +93,17 @@ export default function Footer() {
             </div>
             <div
                 id="licences"
-                className="w-full flex 
-                flex-col-reverse justify-start items-center
-                md:flex-row md:justify-between border-t *:pt-5 *:text-secondary"
+                className="*:text-secondary flex w-full flex-col-reverse items-center justify-start border-t *:pt-5 md:flex-row md:justify-between"
             >
                 <span id="copywrite">@2025, All Rights Reserved</span>
                 <ul id="legal_links" className="flex flex-row items-center gap-5">
                     <li>
                         <Link href="/">Terms of Use</Link>
                     </li>
-                    <li
-                        className="relative pl-5 
-                    md:before:content-[''] md:before:absolute md:before:left-0 md:before:top-1/2 md:before:-translate-y-1/2 md:before:h-4 md:before:w-px md:before:bg-border"
-                    >
+                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:left-0 md:before:top-1/2 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
                         <Link href="/">Privacy Policy</Link>
                     </li>
-                    <li
-                        className="relative pl-5 
-                    md:before:content-[''] md:before:absolute md:before:left-0 md:before:top-1/2 md:before:-translate-y-1/2 md:before:h-4 md:before:w-px md:before:bg-border"
-                    >
+                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:left-0 md:before:top-1/2 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
                         <Link href="/">Cookie Policy</Link>
                     </li>
                 </ul>

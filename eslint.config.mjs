@@ -1,40 +1,56 @@
-import js from '@eslint/js'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { globalIgnores } from 'eslint/config'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+import { FlatCompat } from "@eslint/eslintrc"
+import js from "@eslint/js"
+import reactHooks from "eslint-plugin-react-hooks"
+import reactRefresh from "eslint-plugin-react-refresh"
+import globals from "globals"
+import { dirname } from "path"
+import tseslint from "typescript-eslint"
+import { fileURLToPath } from "url"
 
-export default tseslint.config([
-    // Ignore build and cache folders
-    globalIgnores(['.next', 'dist', 'node_modules', '.turbo']),
-    // Recommended for NextJS, TS
-    ...compat.extends('next/core-web-vitals', 'next/typescript'),
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const compat = new FlatCompat({
+    baseDirectory: __dirname,
+})
+
+export default tseslint.config(
     {
-        files: ['**/*.{js,jsx,ts,tsx}'],
-        extends: [
-            js.configs.recommended, // ESLint recommended rules
-            tseslint.configs.recommended, // TypeScript ESLint rules
-            reactHooks.configs['recommended-latest'], // Latest React Hooks rules
-            reactRefresh.configs.vite, // React Fast Refresh linting
-            'next/core-web-vitals', // Next.js Core Web Vitals rules
-            'next/typescript', // Next.js TypeScript rules
-            'prettier', // Prettier will decided rule format
+        ignores: [
+            ".next/**",
+            "dist/**",
+            "node_modules/**",
+            ".turbo/**",
+            "out/**",
+            "build/**",
+            "bun.lockb",
+            "bun.lock",
+            "*.lock",
+            "*.lockb",
+            "coverage/**",
         ],
+    },
+
+    ...compat.extends("next/core-web-vitals"),
+
+    {
+        files: ["**/*.{js,jsx,ts,tsx}"],
+        plugins: {
+            "react-hooks": reactHooks,
+            "react-refresh": reactRefresh,
+        },
+        extends: [js.configs.recommended, ...tseslint.configs.recommended],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser, // Browser environment globals
+            globals: {
+                ...globals.browser,
+            },
         },
         rules: {
-            'react/react-in-jsx-scope': 'off', // React import not needed in Next.js
-            'react/no-unknown-property': ['error', { ignore: ['fetchPriority'] }], // Allow App Router props
-            'react/display-name': 'off', // Allow anonymous arrow function components
-            'react-hooks/exhaustive-deps': 'warn', // Warn on missing hook deps
-            'react/prop-types': 'off', // Disable prop-types check when using TypeScript
-            '@next/next/no-html-link-for-pages': 'off', // Disable static link page check for dynamic routing
-            'import/no-anonymous-default-export': 'off', // Allow anonymous default exports (Turbopack friendly)
-            indent: ['error', 4, { SwitchCase: 1 }], // Tab size = 4 spaces
+            ...reactHooks.configs.recommended.rules,
+            "react-refresh/only-export-components": "off",
+            "react/no-unknown-property": ["error", { ignore: ["fetchPriority"] }], // Tắt báo lỗi cho fetchPriority (Hàm tối ưu tốc độ render ảnh)
+            indent: ["error", 4, { SwitchCase: 1 }], // case lùi 1 cấp so với switch
         },
     },
-    { ignores: ['.next/**', 'node_modules/**', 'dist/**', 'bun.lockb', 'bun.lock'] }, // Ignore build
-])
+)

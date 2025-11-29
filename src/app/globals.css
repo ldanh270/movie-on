@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 /* Use dark mode follow class `.dark` for Tailwind */
 @custom-variant dark (&:is(.dark *));
@@ -105,6 +105,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        box-sizing: border-box;
         color-scheme: dark;
     }
 }
@@ -114,6 +115,77 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground overflow-x-hidden;
+    }
+    html {
+        @apply overflow-x-hidden;
+    }
+}
+
+@layer utilities {
+    /* Ẩn scrollbar */
+    .hide-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Scrollbar mỏng (alternative) */
+    .thin-scrollbar {
+        scrollbar-width: thin;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-border rounded-full;
+    }
+
+    /* Fade in animation */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes progress {
+        from {
+            transform: scaleX(0);
+        }
+        to {
+            transform: scaleX(1);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.8s ease-out;
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out;
+    }
+
+    .animate-progress {
+        animation: progress linear;
     }
 }

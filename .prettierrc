@@ -11,13 +11,13 @@
     "quoteProps": "as-needed",
     "requirePragma": false,
     "semi": false,
-    "singleQuote": true,
+    "singleQuote": false,
     "tabWidth": 4,
     "trailingComma": "all",
     "useTabs": false,
     "vueIndentScriptAndStyle": false,
 
-    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
     "importOrder": [
         "^(react|react-dom)$",
         "^@?\\w",

@@ -7,3 +7,11 @@ package.json
 pnpm-lock.yaml
 pnpm-workspace.yaml
 pnpm-workspace.yaml
+.next
+out
+coverage
+.turbo
+*.lock
+*.lockb
+bun.lockb
+.env*
