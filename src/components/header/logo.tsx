@@ -5,7 +5,7 @@ export default function Logo() {
     return (
         <Link
             href="/"
-            className="logo flex flex-row items-center justify-start gap-1 select-none md:justify-around"
+            className="logo flex select-none flex-row items-center justify-start gap-1 md:justify-around"
             aria-disabled
         >
             <Image

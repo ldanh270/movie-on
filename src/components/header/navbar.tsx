@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
     // Path of default page (Before navigation)
-    const path: string = usePathname()
+    const path: string | null = usePathname()
 
     // Path list in navbar
     const pages = [
