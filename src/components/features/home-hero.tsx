@@ -22,7 +22,7 @@ interface HomeHeroProps {
     className?: string
 }
 
-export function HomeHero({ movie, className }: HomeHeroProps) {
+export default function HomeHero({ movie, className }: HomeHeroProps) {
     return (
         <section
             className={cn("relative h-[70vh] w-full overflow-hidden", className)}
@@ -78,7 +78,7 @@ export function HomeHero({ movie, className }: HomeHeroProps) {
                                 <PlayIcon className="h-5 w-5" />
                                 Watch Now
                             </Button>
-                            <Button size="lg" variant="outline" className="gap-2">
+                            <Button size="lg" variant="outline" className="cursor-pointer gap-2">
                                 <InfoIcon className="h-5 w-5" />
                                 More Info
                             </Button>

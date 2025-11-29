@@ -17,7 +17,7 @@ import Image from "next/image"
  * - Single Responsibility: Chỉ hiển thị thông tin 1 movie card
  * - Open/Closed: Có thể extend qua className và onPlay callback
  */
-export function MovieCard({ movie, className, onPlay }: MovieCardProps) {
+export default function MovieCard({ movie, className, onPlay }: MovieCardProps) {
     const [isHovered, setIsHovered] = useState(false)
     const [imageError, setImageError] = useState(false)
 

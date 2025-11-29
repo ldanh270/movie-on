@@ -34,5 +34,7 @@
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "typescript.format.insertSpaceAfterCommaDelimiter": true
+    "typescript.format.insertSpaceAfterCommaDelimiter": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true
 }

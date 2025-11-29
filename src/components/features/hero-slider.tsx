@@ -15,7 +15,11 @@ interface HeroSliderProps {
     className?: string
 }
 
-export function HeroSlider({ movies, autoPlayInterval = 5000, className }: HeroSliderProps) {
+export default function HeroSlider({
+    movies,
+    autoPlayInterval = 5000,
+    className,
+}: HeroSliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
     const [progress, setProgress] = useState(0)
@@ -116,7 +120,7 @@ export function HeroSlider({ movies, autoPlayInterval = 5000, className }: HeroS
                         </div>
 
                         {/* Title */}
-                        <h1 className="font-title text-5xl leading-tight font-bold md:text-6xl lg:text-7xl">
+                        <h1 className="font-title text-primary text-5xl leading-tight font-bold md:text-6xl lg:text-7xl">
                             {currentMovie.title}
                         </h1>
 

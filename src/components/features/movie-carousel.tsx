@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils"
 import { MovieCarouselProps } from "@/types/movie"
 
-import { MovieCard } from "./movie-card"
+import MovieCard from "./movie-card"
 
 /**
  * MovieCarousel Component
@@ -21,7 +21,7 @@ import { MovieCard } from "./movie-card"
  * - Liskov Substitution: Sử dụng MovieCard component một cách nhất quán
  * - Dependency Inversion: Phụ thuộc vào MovieCarouselProps interface
  */
-export function MovieCarousel({ movies, title, className }: MovieCarouselProps) {
+export default function MovieCarousel({ movies, title, className }: MovieCarouselProps) {
     const handlePlay = (movieId: number) => {
         console.log("Playing movie:", movieId)
         // TODO: Navigate to movie detail page or open player

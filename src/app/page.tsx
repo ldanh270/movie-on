@@ -1,5 +1,5 @@
-import { HeroSlider } from "@/components/features/hero-slider"
-import { MovieCarousel } from "@/components/features/movie-carousel"
+import HeroSlider from "@/components/features/hero-slider"
+import MovieCarousel from "@/components/features/movie-carousel"
 import { MovieService } from "@/services/movie.service"
 
 /**
