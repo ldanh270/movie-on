@@ -1,4 +1,4 @@
-import { HomeHero } from "@/components/features/home-hero"
+import { HeroSlider } from "@/components/features/hero-slider"
 import { MovieCarousel } from "@/components/features/movie-carousel"
 import { MovieService } from "@/services/movie.service"
 
@@ -13,15 +13,14 @@ import { MovieService } from "@/services/movie.service"
  */
 export default async function Home() {
     // Fetch data từ database (Server-side)
-    const [featuredMovie, trendingMovies, newReleases, popularMovies] = await Promise.all([
-        MovieService.getFeaturedMovie(),
+    const [trendingMovies, newReleases, popularMovies] = await Promise.all([
         MovieService.getTrendingMovies(10),
         MovieService.getNewReleases(10),
         MovieService.getPopularMovies(10),
     ])
 
-    // Handle case: không có featured movie
-    if (!featuredMovie) {
+    // Handle case: không có movies
+    if (trendingMovies.length === 0) {
         return (
             <main className="container mx-auto px-4 py-12">
                 <div className="text-center">
@@ -34,8 +33,8 @@ export default async function Home() {
 
     return (
         <main className="">
-            {/* Hero Section - Featured Movie */}
-            <HomeHero movie={featuredMovie} />
+            {/* Hero Section - Slider với Top 5 Trending Movies */}
+            <HeroSlider movies={trendingMovies.slice(0, 5)} autoPlayInterval={5000} />
 
             {/* Content Sections */}
             <div className="container mx-auto space-y-12 px-4 py-12 md:px-8">
