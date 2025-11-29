@@ -81,15 +81,21 @@ export function HeroSlider({ movies, autoPlayInterval = 5000, className }: HeroS
                             alt={movie.title}
                             fill
                             priority={index === 0}
-                            className="pointer-events-none object-cover"
+                            className="pointer-events-none object-cover object-center"
                             sizes="100vw"
                         />
                     </div>
                 ))}
 
-                {/* Gradient Overlays */}
-                <div className="from-background absolute inset-0 z-20 bg-gradient-to-t via-transparent to-transparent" />
-                <div className="from-background/95 via-background/50 absolute inset-0 z-20 bg-gradient-to-r to-transparent" />
+                {/* Gradient Overlays - Balanced all directions */}
+                {/* Bottom gradient - for content readability */}
+                <div className="from-background/80 via-background/40 absolute inset-0 z-20 bg-gradient-to-t via-40% to-transparent" />
+
+                {/* Left gradient - symmetric */}
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-r via-30% to-transparent" />
+
+                {/* Right gradient - symmetric mirror */}
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-l via-30% to-transparent" />
             </div>
 
             {/* Content */}
