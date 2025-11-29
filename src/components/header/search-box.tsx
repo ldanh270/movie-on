@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { MovieService } from "@/services/movie.service"
 import { Movie } from "@/types/movie"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 /**
  * SearchBox Component - với Real-time search
