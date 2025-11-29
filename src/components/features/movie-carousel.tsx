@@ -28,32 +28,40 @@ export function MovieCarousel({ movies, title, className }: MovieCarouselProps) 
     }
 
     return (
-        <section className={cn("w-full", className)}>
+        <section className={cn("group/carousel relative w-full select-none", className)}>
             {/* Section Title */}
-            {title && <h2 className="font-title mb-6 text-3xl font-bold">{title}</h2>}
+            {title && (
+                <div className="mb-8">
+                    <h2 className="font-title text-3xl font-bold tracking-tight md:text-4xl">
+                        {title}
+                    </h2>
+                </div>
+            )}
 
             {/* Carousel */}
             <Carousel
                 opts={{
                     align: "start",
                     loop: true,
+                    skipSnaps: false,
+                    dragFree: true,
                 }}
                 className="w-full"
             >
-                <CarouselContent className="-ml-2 md:-ml-4">
+                <CarouselContent className="-ml-4 md:-ml-6">
                     {movies.map((movie) => (
                         <CarouselItem
                             key={movie.id}
-                            className="basis-full pl-2 sm:basis-1/2 md:basis-1/3 md:pl-4 lg:basis-1/4 xl:basis-1/5"
+                            className="xs:basis-[70%] basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3 md:pl-6 lg:basis-1/4 xl:basis-1/5"
                         >
                             <MovieCard movie={movie} onPlay={handlePlay} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
 
-                {/* Navigation Buttons */}
-                <CarouselPrevious className="left-0 -translate-x-1/2" />
-                <CarouselNext className="right-0 translate-x-1/2" />
+                {/* Enhanced Navigation Buttons - Brighter on hover */}
+                <CarouselPrevious className="bg-background hover:bg-primary/90 hover:text-primary-foreground active:bg-primary border-primary hover:border-primary -left-5 h-12 w-12 cursor-pointer rounded-full border-2 opacity-0 shadow-lg transition-all select-none group-hover/carousel:opacity-100 hover:scale-110 hover:shadow-xl active:scale-100 disabled:hidden md:-left-6 md:h-14 md:w-14" />
+                <CarouselNext className="bg-background hover:bg-primary/90 hover:text-primary-foreground active:bg-primary border-primary hover:border-primary -right-5 h-12 w-12 cursor-pointer rounded-full border-2 opacity-0 shadow-lg transition-all select-none group-hover/carousel:opacity-100 hover:scale-110 hover:shadow-xl active:scale-100 disabled:hidden md:-right-6 md:h-14 md:w-14" />
             </Carousel>
         </section>
     )
