@@ -48,10 +48,8 @@ export default tseslint.config(
         },
         rules: {
             ...reactHooks.configs.recommended.rules,
-            "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-
+            "react-refresh/only-export-components": "off",
             "react/no-unknown-property": ["error", { ignore: ["fetchPriority"] }], // Tắt báo lỗi cho fetchPriority (Hàm tối ưu tốc độ render ảnh)
-
             indent: ["error", 4, { SwitchCase: 1 }], // case lùi 1 cấp so với switch
         },
     },

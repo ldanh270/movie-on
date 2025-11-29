@@ -64,7 +64,7 @@ export default function HeroSlider({
     return (
         <section
             className={cn(
-                "group/hero relative h-[80vh] w-full overflow-hidden select-none",
+                "group/hero relative h-[91.5vh] w-full overflow-hidden select-none",
                 className,
             )}
             onMouseEnter={() => setIsPaused(true)}
