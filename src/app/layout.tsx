@@ -7,28 +7,28 @@ import { Manrope, Montserrat_Alternates, Oswald, Source_Sans_3 } from "next/font
 
 import "./globals.css"
 
-export const title = Oswald({
+const title = Oswald({
     subsets: ["latin", "vietnamese"],
     weight: ["600", "700"],
     display: "swap",
     variable: "--font-title",
 })
 
-export const text = Source_Sans_3({
+const text = Source_Sans_3({
     subsets: ["latin", "vietnamese"],
     weight: ["400", "500", "600", "700"],
     display: "swap",
     variable: "--font-text",
 })
 
-export const accent = Montserrat_Alternates({
+const accent = Montserrat_Alternates({
     subsets: ["latin", "vietnamese"],
     weight: ["500", "600", "700"],
     display: "swap",
     variable: "--font-accent",
 })
 
-export const footer = Manrope({
+const footer = Manrope({
     subsets: ["latin", "vietnamese"],
     weight: ["500", "600", "700"],
     display: "swap",
