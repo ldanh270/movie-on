@@ -51,7 +51,7 @@ export default function Footer() {
                 <div id="about_me" className="flex w-full flex-col gap-5">
                     <div
                         id="about-title"
-                        className="font-footer select-none self-center text-2xl font-semibold md:self-start"
+                        className="font-footer self-center text-2xl font-semibold select-none md:self-start"
                     >
                         About me
                     </div>
@@ -73,7 +73,7 @@ export default function Footer() {
                     id="connect_with_me"
                     className="font-footer flex w-full flex-col items-center justify-center gap-5 border-t pt-5 text-2xl font-semibold md:w-fit md:border-0 md:pt-0"
                 >
-                    <div id="connect-title" className="select-none text-center">
+                    <div id="connect-title" className="text-center select-none">
                         Connect with me
                     </div>
                     <div id="icons" className="flex flex-row gap-3.5">
@@ -100,10 +100,10 @@ export default function Footer() {
                     <li>
                         <Link href="/">Terms of Use</Link>
                     </li>
-                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:left-0 md:before:top-1/2 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
+                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:top-1/2 md:before:left-0 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
                         <Link href="/">Privacy Policy</Link>
                     </li>
-                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:left-0 md:before:top-1/2 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
+                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:top-1/2 md:before:left-0 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
                         <Link href="/">Cookie Policy</Link>
                     </li>
                 </ul>

@@ -9,5 +9,17 @@ coverage
 *.lockb
 pnpm-lock.yaml
 package-lock.json
+node_modules
+.next
+out
+dist
+build
+coverage
+.turbo
+*.lock
+*.lockb
+pnpm-lock.yaml
+package-lock.json
 bun.lockb
 .env*
+bun.lock

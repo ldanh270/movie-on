@@ -10,7 +10,7 @@ export interface Database {
         Tables: {
             movie: {
                 Row: {
-                    id: number
+                    id: string
                     title: string
                     slug: string
                     description: string | null

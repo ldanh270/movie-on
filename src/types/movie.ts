@@ -1,16 +1,11 @@
+// src/types/movie.ts
 import { Movie as DbMovie, Genre } from "./database"
 
 /**
- * Movie Domain Types
- *
- * SOLID Principles:
- * - Single Responsibility: Chỉ định nghĩa types cho movie domain
- * - Interface Segregation: Tách biệt types cho UI và Database
+ * --- PHẦN 1: TYPE CHO UI (Dùng trong Component) ---
  */
-
-// Movie type cho UI (mapped từ database)
 export interface Movie {
-    id: number
+    id: string
     title: string
     slug: string
     description: string
@@ -18,19 +13,55 @@ export interface Movie {
     backdropUrl?: string
     rating: number
     releaseYear: number
-    genre: string[] // Mapped từ genres
-    duration: number // minutes
+    genre: string[]
+    duration: number
 }
 
-// Movie with full details (bao gồm genres)
+// Props cho Component
+export interface MovieCardProps {
+    movie: Movie
+    className?: string
+    onPlay?: (movieId: string) => void
+}
+
+export interface MovieCarouselProps {
+    movies: Movie[]
+    title?: string
+    className?: string
+}
+
+/**
+ * --- PHẦN 2: TYPE CHO DATABASE & SERVICE ---
+ */
+
+// Interface mở rộng để Service xử lý (Data sau khi đã làm phẳng genres)
 export interface MovieWithGenres extends DbMovie {
     genres: Genre[]
 }
 
-// Helper function to map database movie to UI movie
+// (Khớp với câu query select có join bảng moviegenre)
+export interface MovieRawResponse extends DbMovie {
+    moviegenre: {
+        genre: Genre | null
+    }[]
+}
+
+/**
+ * --- PHẦN 3: HELPER FUNCTIONS ---
+ */
+
+// Helper 1: Map từ dữ liệu thô Supabase sang dạng trung gian (MovieWithGenres)
+export function mapRawToMovieWithGenres(raw: MovieRawResponse): MovieWithGenres {
+    return {
+        ...raw, // Copy các trường của DbMovie
+        genres: raw.moviegenre?.map((g) => g.genre).filter((g): g is Genre => g !== null) || [],
+    }
+}
+
+// Helper 2: Map từ dạng trung gian sang UI (Snake_case -> CamelCase)
 export function mapDbMovieToMovie(dbMovie: MovieWithGenres): Movie {
     return {
-        id: dbMovie.id,
+        id: dbMovie.id, // Bây giờ cả 2 đều là string (uuid), khớp nhau
         title: dbMovie.title,
         slug: dbMovie.slug,
         description: dbMovie.description || "",
@@ -41,16 +72,4 @@ export function mapDbMovieToMovie(dbMovie: MovieWithGenres): Movie {
         genre: dbMovie.genres.map((g) => g.name),
         duration: dbMovie.duration_minutes || 0,
     }
-}
-
-export interface MovieCardProps {
-    movie: Movie
-    className?: string
-    onPlay?: (movieId: number) => void
-}
-
-export interface MovieCarouselProps {
-    movies: Movie[]
-    title?: string
-    className?: string
 }

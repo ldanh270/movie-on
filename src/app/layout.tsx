@@ -28,7 +28,7 @@ const accent = Montserrat_Alternates({
     variable: "--font-accent",
 })
 
-const footer = Manrope({
+const fontFooter = Manrope({
     subsets: ["latin", "vietnamese"],
     weight: ["500", "600", "700"],
     display: "swap",
@@ -45,8 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${text.variable} ${title.variable} ${accent.variable} ${footer.variable} bg-background text-foreground hide-scrollbar min-h-dvh antialiased`}
-                suppressHydrationWarning
+                className={`${text.variable} ${title.variable} ${accent.variable} ${fontFooter.variable} bg-background text-foreground min-h-dvh antialiased`}
             >
                 <ThemeProvider
                     attribute="class"

@@ -39,6 +39,7 @@ export default function Slideshow({
         if (!playing || reduced || count <= 1) return
         const id = setInterval(() => setIndex((i) => wrap(i + 1)), intervalMs)
         return () => clearInterval(id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playing, reduced, intervalMs, count])
 
     useEffect(() => {
@@ -67,6 +68,7 @@ export default function Slideshow({
         }
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count])
 
     const next = () => setIndex((i) => (loop ? wrap(i + 1) : Math.min(i + 1, count - 1)))

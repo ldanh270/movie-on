@@ -22,7 +22,7 @@ import MovieCard from "./movie-card"
  * - Dependency Inversion: Phụ thuộc vào MovieCarouselProps interface
  */
 export default function MovieCarousel({ movies, title, className }: MovieCarouselProps) {
-    const handlePlay = (movieId: number) => {
+    const handlePlay = (movieId: string) => {
         console.log("Playing movie:", movieId)
         // TODO: Navigate to movie detail page or open player
     }
