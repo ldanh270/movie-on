@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Movie } from "@/types/movie"
+import { MovieCardData } from "@/types/movie"
 
 import { useEffect, useState } from "react"
 
@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, InfoIcon, PlayIcon, Star } from "lucide-reac
 import Image from "next/image"
 
 interface HeroSliderProps {
-    movies: Movie[]
+    movies: MovieCardData[]
     autoPlayInterval?: number
     className?: string
 }
@@ -81,7 +81,7 @@ export default function HeroSlider({
                         )}
                     >
                         <Image
-                            src={movie.backdropUrl || movie.posterUrl}
+                            src={movie.backgroundUrl || movie.posterUrl}
                             alt={movie.title}
                             fill
                             priority={index === 0}

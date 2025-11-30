@@ -73,3 +73,10 @@ export type MovieWithReviews = Movie & {
     reviews?: Review[]
     review_count?: number
 }
+
+// Type cho query result với join
+export type MovieWithGenreJoin = Movie & {
+    moviegenre: Array<{
+        genre: Genre
+    }>
+}

@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { MovieService } from "@/services/movie.service"
-import { Movie } from "@/types/movie"
+import { MovieCardData } from "@/types/movie"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from "react"
 export default function SearchBox() {
     const [query, setQuery] = useState("")
     const [activeIndex, setActiveIndex] = useState(-1)
-    const [suggestions, setSuggestions] = useState<Movie[]>([])
+    const [suggestions, setSuggestions] = useState<MovieCardData[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const rootRef = useRef<HTMLDivElement>(null)
 

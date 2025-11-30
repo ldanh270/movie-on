@@ -8,9 +8,15 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
-import { MovieCarouselProps } from "@/types/movie"
+import { MovieCardData } from "@/types/movie"
 
 import MovieCard from "./movie-card"
+
+interface MovieCarouselProps {
+    title: string
+    movies: MovieCardData[]
+    className?: string
+}
 
 /**
  * MovieCarousel Component
