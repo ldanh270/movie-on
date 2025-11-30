@@ -6,6 +6,7 @@ import { MovieCardData } from "@/types/movie"
 
 import { InfoIcon, PlayIcon } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 /**
  * HomeHero Component - Featured Movie Section
@@ -14,8 +15,6 @@ import Image from "next/image"
  * - Single Responsibility: Hiển thị featured movie hero section
  * - Open/Closed: Có thể extend qua className prop
  * - Interface Segregation: Props rõ ràng, minimal
- *
- * Note: Thêm suppressHydrationWarning để tránh warning với dynamic content
  */
 interface HomeHeroProps {
     movie: MovieCardData
@@ -23,6 +22,8 @@ interface HomeHeroProps {
 }
 
 export default function HomeHero({ movie, ...props }: HomeHeroProps) {
+    const movieSlug = movie.slug || movie.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+
     return (
         <section
             className={cn("relative h-[70vh] w-full overflow-hidden", props.className)}
@@ -74,10 +75,12 @@ export default function HomeHero({ movie, ...props }: HomeHeroProps) {
 
                         {/* Actions */}
                         <div className="flex flex-wrap gap-3 pt-4">
-                            <Button size="lg" className="gap-2">
-                                <PlayIcon className="h-5 w-5" />
-                                Watch Now
-                            </Button>
+                            <Link href={`/watch/${movieSlug}`}>
+                                <Button size="lg" className="gap-2">
+                                    <PlayIcon className="h-5 w-5" />
+                                    Watch Now
+                                </Button>
+                            </Link>
                             <Button size="lg" variant="outline" className="cursor-pointer gap-2">
                                 <InfoIcon className="h-5 w-5" />
                                 More Info
