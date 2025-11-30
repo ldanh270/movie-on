@@ -76,5 +76,6 @@
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": true,
     "editor.definitionLinkOpensInPeek": false,
-    "typescript.tsserver.watchOptions": "vscode"
+    "typescript.tsserver.watchOptions": "vscode",
+    "C_Cpp.intelliSenseMemoryLimit": 8192
 }

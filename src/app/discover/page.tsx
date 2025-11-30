@@ -2,6 +2,7 @@ import GenreCard from "@/components/features/genre-card"
 import { GenreService } from "@/services/genre.service"
 
 import { Film } from "lucide-react"
+import { Metadata } from "next"
 import Link from "next/link"
 
 /**
@@ -11,7 +12,7 @@ import Link from "next/link"
  * - Single Responsibility: Compose genre grid và fetch data
  * - Dependency Inversion: Phụ thuộc vào GenreService abstraction
  */
-export const metadata = {
+export const metadata: Metadata = {
     title: "Discover Movies - MovieOn",
     description: "Browse movies by genre. Find your next favorite movie.",
 }

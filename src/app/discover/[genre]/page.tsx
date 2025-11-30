@@ -4,6 +4,7 @@ import { GenreService } from "@/services/genre.service"
 import { MovieService } from "@/services/movie.service"
 
 import { ArrowLeft, ChevronLeft, ChevronRight, Film } from "lucide-react"
+import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -20,7 +21,7 @@ interface GenrePageProps {
     searchParams: Promise<{ page?: string }>
 }
 
-export async function generateMetadata({ params }: GenrePageProps) {
+export async function generateMetadata({ params }: GenrePageProps): Promise<Metadata> {
     const { genre: genreSlug } = await params
     const genre = await GenreService.getGenreBySlug(genreSlug)
 
