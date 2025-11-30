@@ -42,7 +42,7 @@ const Header = () => {
                 <div className="hidden md:block">
                     <Navbar />
                 </div>
-                <div className="hidden items-center justify-center gap-1 md:flex">
+                <div className="hidden items-center justify-center gap-2 md:flex">
                     <SearchBox />
                     <ModeToggle />
                 </div>
