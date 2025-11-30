@@ -39,7 +39,6 @@ export interface MovieWithGenres extends DbMovie {
     genres: Genre[]
 }
 
-// 👇 BỔ SUNG QUAN TRỌNG: Type mô tả dữ liệu thô Supabase trả về
 // (Khớp với câu query select có join bảng moviegenre)
 export interface MovieRawResponse extends DbMovie {
     moviegenre: {
@@ -52,7 +51,6 @@ export interface MovieRawResponse extends DbMovie {
  */
 
 // Helper 1: Map từ dữ liệu thô Supabase sang dạng trung gian (MovieWithGenres)
-// Hàm này giúp loại bỏ "as any" bên Service
 export function mapRawToMovieWithGenres(raw: MovieRawResponse): MovieWithGenres {
     return {
         ...raw, // Copy các trường của DbMovie
