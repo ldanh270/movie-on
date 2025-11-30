@@ -50,10 +50,10 @@ export default function GenreCard({ genre, movieCount = 0, className }: GenreCar
     const colors = genreColors[genre.slug] || defaultColor
 
     return (
-        <Link href={`/discover/${genre.slug}`} className="group select-none">
+        <Link href={`/discover/${genre.slug}`}>
             <Card
                 className={cn(
-                    "relative h-40 cursor-pointer overflow-hidden border transition-all duration-500 ease-out",
+                    "relative h-40 cursor-pointer overflow-hidden border transition-all duration-500 ease-out select-none",
                     "hover:border-primary/50 hover:shadow-primary/10 hover:shadow-lg",
                     "hover:scale-105",
                     "focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",

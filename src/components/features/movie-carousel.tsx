@@ -31,7 +31,6 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
         <section
             className={cn(
                 "group/carousel relative flex w-full flex-col gap-1 select-none",
-                // Thêm padding lớn hơn để cards có không gian zoom
                 "py-8 md:py-10 lg:py-12",
                 className,
             )}

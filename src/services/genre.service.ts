@@ -1,66 +1,57 @@
-import { supabase } from "@/lib/supabase/client"
-import { Genre } from "@/types/database"
+import { supabase } from "@/lib/supabase"
+import type { Genre } from "@/types/database"
 
 /**
- * GenreService - Quản lý operations với genres
+ * Genre Service
  *
- * SOLID Principles:
- * - Single Responsibility: Chỉ xử lý logic liên quan đến genres
- * - Dependency Inversion: Phụ thuộc vào supabase client abstraction
+ * Service layer để tương tác với genre data từ Supabase
  */
 export class GenreService {
     /**
-     * Get all genres
+     * Lấy tất cả genres
      */
     static async getAllGenres(): Promise<Genre[]> {
-        try {
-            const { data, error } = await supabase
-                .from("genre")
-                .select("*")
-                .order("name", { ascending: true })
+        const { data, error } = await supabase
+            .from("genre")
+            .select("*")
+            .order("name", { ascending: true })
 
-            if (error) throw error
-            return data || []
-        } catch (error) {
+        if (error) {
             console.error("Error fetching genres:", error)
             return []
         }
+
+        return data || []
     }
 
     /**
-     * Get genre by slug
+     * Lấy genre theo slug
      */
     static async getGenreBySlug(slug: string): Promise<Genre | null> {
-        try {
-            const { data, error } = await supabase
-                .from("genre")
-                .select("*")
-                .eq("slug", slug)
-                .single()
+        const { data, error } = await supabase.from("genre").select("*").eq("slug", slug).single()
 
-            if (error) throw error
-            return data
-        } catch (error) {
+        if (error) {
             console.error("Error fetching genre:", error)
             return null
         }
+
+        return data
     }
 
     /**
-     * Get movie count by genre
+     * Đếm số lượng movies trong genre
      */
     static async getMovieCountByGenre(genreId: number): Promise<number> {
-        try {
-            const { count, error } = await supabase
-                .from("moviegenre")
-                .select("*", { count: "exact", head: true })
-                .eq("genre_id", genreId)
+        const { count, error } = await supabase
+            .from("moviegenre")
+            .select("*", { count: "exact", head: true })
+            .eq("genre_id", genreId)
 
-            if (error) throw error
-            return count || 0
-        } catch (error) {
-            console.error("Error fetching movie count:", error)
+        if (error) {
+            console.error("Error counting movies:", error)
             return 0
         }
+
+        return count || 0
     }
 }

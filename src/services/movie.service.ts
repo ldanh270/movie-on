@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase"
 import type { Movie, MovieWithGenres } from "@/types/database"
+import { type MovieCardData, mapDatabaseMovieToUI } from "@/types/movie"
 
 /**
  * Movie Service
@@ -11,11 +12,12 @@ export class MovieService {
     /**
      * Lấy danh sách trending movies (theo rating_average)
      */
-    static async getTrendingMovies(limit = 10): Promise<Movie[]> {
+    static async getTrendingMovies(limit = 10): Promise<MovieCardData[]> {
         const { data, error } = await supabase
             .from("movie")
             .select("*")
-            .order("rating_average", { ascending: false, nullsFirst: false })
+            .not("rating_average", "is", null)
+            .order("rating_average", { ascending: false })
             .limit(limit)
 
         if (error) {
@@ -23,13 +25,13 @@ export class MovieService {
             return []
         }
 
-        return data || []
+        return (data || []).map(mapDatabaseMovieToUI)
     }
 
     /**
      * Lấy danh sách new releases (theo created_at)
      */
-    static async getNewReleases(limit = 10): Promise<Movie[]> {
+    static async getNewReleases(limit = 10): Promise<MovieCardData[]> {
         const { data, error } = await supabase
             .from("movie")
             .select("*")
@@ -41,17 +43,18 @@ export class MovieService {
             return []
         }
 
-        return data || []
+        return (data || []).map(mapDatabaseMovieToUI)
     }
 
     /**
      * Lấy danh sách popular movies (theo publish_year và rating)
      */
-    static async getPopularMovies(limit = 10): Promise<Movie[]> {
+    static async getPopularMovies(limit = 10): Promise<MovieCardData[]> {
         const { data, error } = await supabase
             .from("movie")
             .select("*")
-            .order("publish_year", { ascending: false, nullsFirst: false })
+            .not("publish_year", "is", null)
+            .order("publish_year", { ascending: false })
             .order("rating_average", { ascending: false, nullsFirst: false })
             .limit(limit)
 
@@ -60,7 +63,35 @@ export class MovieService {
             return []
         }
 
-        return data || []
+        return (data || []).map(mapDatabaseMovieToUI)
+    }
+
+    /**
+     * Lấy movies theo genre
+     */
+    static async getMoviesByGenre(genreSlug: string, limit = 50): Promise<MovieCardData[]> {
+        const { data, error } = await supabase
+            .from("movie")
+            .select(
+                `
+                *,
+                moviegenre!inner (
+                    genre!inner (
+                        slug
+                    )
+                )
+            `,
+            )
+            .eq("moviegenre.genre.slug", genreSlug)
+            .order("rating_average", { ascending: false, nullsFirst: false })
+            .limit(limit)
+
+        if (error) {
+            console.error("Error fetching movies by genre:", error)
+            return []
+        }
+
+        return (data || []).map(mapDatabaseMovieToUI)
     }
 
     /**

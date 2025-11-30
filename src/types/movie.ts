@@ -1,5 +1,6 @@
 // src/types/movie.ts
 import { Movie as DbMovie, Genre } from "./database"
+import type { Movie } from "./database"
 
 /**
  * --- PHẦN 1: TYPE CHO UI (Dùng trong Component) ---
@@ -71,5 +72,25 @@ export function mapDbMovieToMovie(dbMovie: MovieWithGenres): Movie {
         releaseYear: dbMovie.publish_year || new Date().getFullYear(),
         genre: dbMovie.genres.map((g) => g.name),
         duration: dbMovie.duration_minutes || 0,
+    }
+}
+
+/**
+ * Mapper: Convert Database Movie -> UI Movie
+ */
+export function mapDatabaseMovieToUI(movie: Movie): MovieCardData {
+    return {
+        id: movie.id,
+        title: movie.title,
+        description: movie.description || "No description available",
+        posterUrl: movie.poster_url || "https://placehold.co/500x750/1a1a1a/white?text=No+Image",
+        backgroundUrl:
+            movie.background_url ||
+            movie.poster_url ||
+            "https://placehold.co/1920x1080/1a1a1a/white?text=No+Image",
+        rating: movie.rating_average || 0,
+        releaseYear: movie.publish_year || new Date().getFullYear(),
+        duration: movie.duration_minutes || 0,
+        genre: [], // Will be populated by service if needed
     }
 }

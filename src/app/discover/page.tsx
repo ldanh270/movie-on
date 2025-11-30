@@ -38,8 +38,7 @@ export default async function Discover() {
                     </div>
                     <h1 className="text-3xl font-bold">No Genres Available</h1>
                     <p className="text-muted-foreground mt-2 max-w-md">
-                        We`&apos re currently updating our genre collection. Please check back
-                        later.
+                        We{"'"}re currently updating our genre collection. Please check back later.
                     </p>
                 </div>
             </main>
@@ -49,7 +48,7 @@ export default async function Discover() {
     return (
         <main className="container mx-auto px-4 py-12 md:px-8">
             {/* Header Section */}
-            <div className="mb-12 space-y-4">
+            <div className="mb-12 space-y-4 select-none">
                 <div className="flex items-center gap-3">
                     <div className="bg-primary rounded-lg p-2.5">
                         <Film className="h-7 w-7 text-white" strokeWidth={2} />
@@ -84,9 +83,9 @@ export default async function Discover() {
             </div>
 
             {/* Bottom CTA */}
-            <div className="mt-16 text-center">
+            <div className="mt-16 text-center select-none">
                 <p className="text-muted-foreground">
-                    Can&#39t find what you&#39re looking for?{" "}
+                    Can{"'"}t find what you{"'"}re looking for?{" "}
                     <Link href="/" className="text-primary font-semibold hover:underline">
                         Explore Trending Movies
                     </Link>
