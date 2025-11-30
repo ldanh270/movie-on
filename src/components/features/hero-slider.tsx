@@ -108,9 +108,9 @@ export default function HeroSlider({
                 ))}
 
                 {/* Gradient Overlays */}
-                <div className="from-background/80 via-background/40 absolute inset-0 z-20 bg-gradient-to-t via-40% to-transparent" />
-                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-r via-30% to-transparent" />
-                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-l via-30% to-transparent" />
+                <div className="from-background/80 via-background/40 absolute inset-0 z-20 bg-linear-to-t via-40% to-transparent" />
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-linear-to-r via-30% to-transparent" />
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-linear-to-l via-30% to-transparent" />
             </div>
 
             {/* Content */}

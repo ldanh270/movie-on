@@ -44,7 +44,7 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
             {title && (
                 <div className="mb-4 md:mb-6">
                     <h2 className="font-title text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
-                        <span className="from-foreground to-foreground/70 bg-gradient-to-r bg-clip-text">
+                        <span className="from-foreground to-foreground/70 bg-linear-to-r bg-clip-text">
                             {title}
                         </span>
                     </h2>

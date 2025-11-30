@@ -56,10 +56,10 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
             onKeyDown={handleKeyDown}
         >
             {/* Movie Poster */}
-            <div className="bg-muted/20 relative aspect-[2/3] overflow-hidden rounded-t-lg">
+            <div className="bg-muted/20 relative aspect-2/3 overflow-hidden rounded-t-lg">
                 {/* Loading Skeleton */}
                 {!imageLoaded && !imageError && posterUrl && (
-                    <div className="from-muted via-muted/50 to-muted absolute inset-0 animate-pulse bg-gradient-to-br" />
+                    <div className="from-muted via-muted/50 to-muted absolute inset-0 animate-pulse bg-linear-to-br" />
                 )}
 
                 {posterUrl ? (
@@ -91,7 +91,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                 {/* Hover Overlay with smooth fade-in */}
                 <div
                     className={cn(
-                        "absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-t from-black/95 via-black/60 to-transparent p-4",
+                        "absolute inset-0 z-10 flex flex-col items-center justify-center bg-linear-to-t from-black/95 via-black/60 to-transparent p-4",
                         "transition-all duration-500 ease-out",
                         isHovered ? "opacity-100" : "pointer-events-none opacity-0",
                     )}

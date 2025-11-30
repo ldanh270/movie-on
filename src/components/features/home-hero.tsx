@@ -23,7 +23,7 @@ interface HomeHeroProps {
 
 export default function HomeHero({ movie, ...props }: HomeHeroProps) {
     const movieSlug = movie.slug || movie.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-
+    const imageSrc = movie.backgroundUrl || movie.posterUrl || ""
     return (
         <section
             className={cn("relative h-[70vh] w-full overflow-hidden", props.className)}
@@ -32,7 +32,7 @@ export default function HomeHero({ movie, ...props }: HomeHeroProps) {
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image
-                    src={movie.backgroundUrl || movie.posterUrl}
+                    src={imageSrc}
                     alt={movie.title}
                     fill
                     priority
@@ -40,8 +40,8 @@ export default function HomeHero({ movie, ...props }: HomeHeroProps) {
                     sizes="100vw"
                 />
                 {/* Gradient Overlay */}
-                <div className="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent" />
-                <div className="from-background/90 via-background/50 absolute inset-0 bg-gradient-to-r to-transparent" />
+                <div className="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent" />
+                <div className="from-background/90 via-background/50 absolute inset-0 bg-linear-to-r to-transparent" />
             </div>
 
             {/* Content */}
