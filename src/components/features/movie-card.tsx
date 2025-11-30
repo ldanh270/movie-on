@@ -141,7 +141,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
             >
                 <StarIcon className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400 drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]" />
                 <span className="text-xs font-bold tracking-wide text-white">
-                    {movie.rating.toFixed(1)}
+                    {(movie.rating ?? 0).toFixed(1)}
                 </span>
             </div>
 

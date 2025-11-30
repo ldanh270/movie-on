@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Movie } from "@/types/movie"
+import { MovieCardData } from "@/types/movie"
 
 import { InfoIcon, PlayIcon } from "lucide-react"
 import Image from "next/image"
@@ -18,20 +18,20 @@ import Image from "next/image"
  * Note: Thêm suppressHydrationWarning để tránh warning với dynamic content
  */
 interface HomeHeroProps {
-    movie: Movie
+    movie: MovieCardData
     className?: string
 }
 
-export default function HomeHero({ movie, className }: HomeHeroProps) {
+export default function HomeHero({ movie, ...props }: HomeHeroProps) {
     return (
         <section
-            className={cn("relative h-[70vh] w-full overflow-hidden", className)}
+            className={cn("relative h-[70vh] w-full overflow-hidden", props.className)}
             suppressHydrationWarning
         >
             {/* Background Image */}
             <div className="absolute inset-0">
                 <Image
-                    src={movie.backdropUrl || movie.posterUrl}
+                    src={movie.backgroundUrl || movie.posterUrl}
                     alt={movie.title}
                     fill
                     priority

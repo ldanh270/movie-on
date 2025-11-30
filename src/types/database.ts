@@ -29,13 +29,14 @@ export interface Database {
                     id: number
                     slug: string
                     name: string
+                    background_url: string | null
                 }
                 Insert: Omit<Database["public"]["Tables"]["genre"]["Row"], "id">
                 Update: Partial<Database["public"]["Tables"]["genre"]["Insert"]>
             }
             moviegenre: {
                 Row: {
-                    movie_id: number
+                    movie_id: string
                     genre_id: number
                 }
                 Insert: Database["public"]["Tables"]["moviegenre"]["Row"]
@@ -43,8 +44,8 @@ export interface Database {
             }
             review: {
                 Row: {
-                    id: number
-                    movie_id: number
+                    id: string
+                    movie_id: string
                     user_name: string
                     rating: number
                     comment: string | null
@@ -62,3 +63,20 @@ export type Movie = Database["public"]["Tables"]["movie"]["Row"]
 export type Genre = Database["public"]["Tables"]["genre"]["Row"]
 export type MovieGenre = Database["public"]["Tables"]["moviegenre"]["Row"]
 export type Review = Database["public"]["Tables"]["review"]["Row"]
+
+// Extended types with relationships
+export type MovieWithGenres = Movie & {
+    genres?: Genre[]
+}
+
+export type MovieWithReviews = Movie & {
+    reviews?: Review[]
+    review_count?: number
+}
+
+// Type cho query result với join
+export type MovieWithGenreJoin = Movie & {
+    moviegenre: Array<{
+        genre: Genre
+    }>
+}

@@ -8,9 +8,15 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
-import { MovieCarouselProps } from "@/types/movie"
+import { MovieCardData } from "@/types/movie"
 
 import MovieCard from "./movie-card"
+
+interface MovieCarouselProps {
+    title: string
+    movies: MovieCardData[]
+    className?: string
+}
 
 /**
  * MovieCarousel Component
@@ -31,7 +37,6 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
         <section
             className={cn(
                 "group/carousel relative flex w-full flex-col gap-1 select-none",
-                // Thêm padding lớn hơn để cards có không gian zoom
                 "py-8 md:py-10 lg:py-12",
                 className,
             )}

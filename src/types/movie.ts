@@ -1,33 +1,32 @@
 // src/types/movie.ts
-import { Movie as DbMovie, Genre } from "./database"
+import type { Movie as DbMovie, Genre } from "./database"
 
 /**
  * --- PHẦN 1: TYPE CHO UI (Dùng trong Component) ---
  */
-export interface Movie {
+
+/**
+ * Movie Card Data - UI format
+ */
+export interface MovieCardData {
     id: string
     title: string
-    slug: string
     description: string
     posterUrl: string
-    backdropUrl?: string
+    backgroundUrl: string
     rating: number
     releaseYear: number
-    genre: string[]
     duration: number
+    genre: string[]
 }
 
-// Props cho Component
+/**
+ * Movie Card Props
+ */
 export interface MovieCardProps {
-    movie: Movie
+    movie: MovieCardData
     className?: string
     onPlay?: (movieId: string) => void
-}
-
-export interface MovieCarouselProps {
-    movies: Movie[]
-    title?: string
-    className?: string
 }
 
 /**
@@ -50,26 +49,22 @@ export interface MovieRawResponse extends DbMovie {
  * --- PHẦN 3: HELPER FUNCTIONS ---
  */
 
-// Helper 1: Map từ dữ liệu thô Supabase sang dạng trung gian (MovieWithGenres)
-export function mapRawToMovieWithGenres(raw: MovieRawResponse): MovieWithGenres {
+/**
+ * Mapper: Convert Database Movie -> UI Movie
+ */
+export function mapDatabaseMovieToUI(movie: DbMovie): MovieCardData {
     return {
-        ...raw, // Copy các trường của DbMovie
-        genres: raw.moviegenre?.map((g) => g.genre).filter((g): g is Genre => g !== null) || [],
-    }
-}
-
-// Helper 2: Map từ dạng trung gian sang UI (Snake_case -> CamelCase)
-export function mapDbMovieToMovie(dbMovie: MovieWithGenres): Movie {
-    return {
-        id: dbMovie.id, // Bây giờ cả 2 đều là string (uuid), khớp nhau
-        title: dbMovie.title,
-        slug: dbMovie.slug,
-        description: dbMovie.description || "",
-        posterUrl: dbMovie.poster_url || "/placeholder-poster.jpg",
-        backdropUrl: dbMovie.background_url || undefined,
-        rating: dbMovie.rating_average || 0,
-        releaseYear: dbMovie.publish_year || new Date().getFullYear(),
-        genre: dbMovie.genres.map((g) => g.name),
-        duration: dbMovie.duration_minutes || 0,
+        id: movie.id,
+        title: movie.title,
+        description: movie.description || "No description available",
+        posterUrl: movie.poster_url || "https://placehold.co/500x750/1a1a1a/white?text=No+Image",
+        backgroundUrl:
+            movie.background_url ||
+            movie.poster_url ||
+            "https://placehold.co/1920x1080/1a1a1a/white?text=No+Image",
+        rating: movie.rating_average || 0,
+        releaseYear: movie.publish_year || new Date().getFullYear(),
+        duration: movie.duration_minutes || 0,
+        genre: [],
     }
 }
