@@ -2,112 +2,162 @@ import Facebook from "@/assets/svg/social-icons/facebook-icon.svg"
 import Github from "@/assets/svg/social-icons/github-icon.svg"
 import LinkedIn from "@/assets/svg/social-icons/linkedin-icon.svg"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { SvgIcon } from "@/types/common"
 
+import { Mail, Phone } from "lucide-react"
 import Link from "next/link"
 
-// Contents for About me section
-const aboutContent: { label: string; details: string }[] = [
+/**
+ * Footer Component
+ *
+ * SOLID Principles:
+ * - Single Responsibility: Hiển thị footer với thông tin liên hệ và links
+ * - Open/Closed: Có thể mở rộng thông qua data arrays
+ */
+
+// Contact information
+const contactInfo: { icon: typeof Mail; label: string; value: string; href?: string }[] = [
     {
+        icon: Mail,
         label: "Email",
-        details: "ducanhle.dn@gmail.com",
+        value: "ducanhle.dn@gmail.com",
+        href: "mailto:ducanhle.dn@gmail.com",
     },
     {
+        icon: Phone,
         label: "Phone",
-        details: "+84 905 944 716",
+        value: "+84 905 944 716",
+        href: "tel:+84905944716",
     },
 ]
 
-// Links for "Connect with me" section
-const connectContent: {
-    label: string
-    icon: SvgIcon
-    link: string
-}[] = [
+// Social media links
+const socialLinks: { label: string; icon: SvgIcon; href: string }[] = [
     {
         label: "Facebook",
         icon: Facebook,
-        link: "https://www.facebook.com/ldanh270",
+        href: "https://www.facebook.com/ldanh270",
     },
     {
         label: "Github",
         icon: Github,
-        link: "https://github.com/ldanh270",
+        href: "https://github.com/ldanh270",
     },
     {
         label: "LinkedIn",
         icon: LinkedIn,
-        link: "https://www.linkedin.com/in/ldanh270/",
+        href: "https://www.linkedin.com/in/ldanh270/",
     },
+]
+
+// Legal links
+const legalLinks: { label: string; href: string }[] = [
+    { label: "Terms of Use", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Cookie Policy", href: "/cookies" },
 ]
 
 export default function Footer() {
     return (
-        <div className="bg-background flex h-auto w-full flex-col gap-5 border-t p-5">
-            <div
-                id="contacts"
-                className="contacts flex w-full flex-col items-center gap-5 md:flex-row md:justify-between"
-            >
-                <div id="about_me" className="flex w-full flex-col gap-5">
-                    <div
-                        id="about-title"
-                        className="font-footer self-center text-2xl font-semibold select-none md:self-start"
-                    >
-                        About me
-                    </div>
-                    <div id="content-details" className="flex flex-col gap-2">
-                        {aboutContent.map(({ label, details }) => {
-                            return (
-                                <div
-                                    key={label}
-                                    className="*:font-footer *:text-secondary flex w-full flex-row"
-                                >
-                                    <span className="w-20 select-none md:w-20">{label}</span>
-                                    <span className="w-full md:w-64">{details}</span>
+        <footer className="bg-background border-t select-none">
+            <div className="container mx-auto px-4 py-12 md:px-8">
+                {/* Main Content */}
+                <div className="grid gap-12 md:grid-cols-2 lg:gap-16">
+                    {/* Contact Section */}
+                    <div className="space-y-6">
+                        <h3 className="font-title text-2xl font-bold">About Me</h3>
+                        <div className="space-y-4">
+                            {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                                <div key={label} className="flex items-start gap-3">
+                                    <div className="bg-primary/10 text-primary rounded-lg p-2">
+                                        <Icon className="h-5 w-5" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-muted-foreground text-sm font-medium">
+                                            {label}
+                                        </p>
+                                        {href ? (
+                                            <Link
+                                                href={href}
+                                                className="text-foreground hover:text-primary text-base transition-colors"
+                                            >
+                                                {value}
+                                            </Link>
+                                        ) : (
+                                            <p className="text-foreground text-base">{value}</p>
+                                        )}
+                                    </div>
                                 </div>
-                            )
-                        })}
+                            ))}
+                        </div>
                     </div>
-                </div>
-                <div
-                    id="connect_with_me"
-                    className="font-footer flex w-full flex-col items-center justify-center gap-5 border-t pt-5 text-2xl font-semibold md:w-fit md:border-0 md:pt-0"
-                >
-                    <div id="connect-title" className="text-center select-none">
-                        Connect with me
-                    </div>
-                    <div id="icons" className="flex flex-row gap-3.5">
-                        {connectContent.map(({ label, icon: Icon, link }) => (
-                            <Button asChild key={label} variant="ghost" size="icon">
-                                <Link
-                                    href={link}
-                                    target="_blank"
-                                    className="hover:bg-input size-14 border"
+
+                    {/* Social Links Section */}
+                    <div className="space-y-6">
+                        <h3 className="font-title text-2xl font-bold">Connect With Me</h3>
+                        <div className="flex flex-wrap gap-3">
+                            {socialLinks.map(({ label, icon: Icon, href }) => (
+                                <Button
+                                    key={label}
+                                    asChild
+                                    variant="outline"
+                                    size="icon"
+                                    className={cn(
+                                        "hover:bg-primary hover:text-primary-foreground",
+                                        "h-12 w-12 transition-all duration-300",
+                                        "hover:scale-110 active:scale-95",
+                                    )}
                                 >
-                                    <Icon className="fill-foreground size-auto" />
-                                </Link>
-                            </Button>
-                        ))}
+                                    <Link
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={label}
+                                    >
+                                        <Icon className="h-6 w-6" />
+                                    </Link>
+                                </Button>
+                            ))}
+                        </div>
+                        <p className="text-muted-foreground text-sm">
+                            Follow me on social media for updates and more content about web
+                            development and movies.
+                        </p>
                     </div>
                 </div>
+
+                {/* Divider */}
+                <div className="border-border my-8 border-t" />
+
+                {/* Bottom Section */}
+                <div className="flex flex-col-reverse items-center justify-between gap-4 md:flex-row">
+                    {/* Copyright */}
+                    <p className="text-muted-foreground text-sm">
+                        © {new Date().getFullYear()} MovieOn. All rights reserved.
+                    </p>
+
+                    {/* Legal Links */}
+                    <nav className="flex flex-wrap items-center justify-center gap-2">
+                        {legalLinks.map((link, index) => (
+                            <div key={link.label} className="flex items-center gap-2">
+                                <Link
+                                    href={link.href}
+                                    className={cn(
+                                        "text-muted-foreground hover:text-foreground",
+                                        "text-sm transition-colors",
+                                    )}
+                                >
+                                    {link.label}
+                                </Link>
+                                {index < legalLinks.length - 1 && (
+                                    <span className="text-border">•</span>
+                                )}
+                            </div>
+                        ))}
+                    </nav>
+                </div>
             </div>
-            <div
-                id="licences"
-                className="*:text-secondary flex w-full flex-col-reverse items-center justify-start border-t *:pt-5 md:flex-row md:justify-between"
-            >
-                <span id="copywrite">@2025, All Rights Reserved</span>
-                <ul id="legal_links" className="flex flex-row items-center gap-5">
-                    <li>
-                        <Link href="/">Terms of Use</Link>
-                    </li>
-                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:top-1/2 md:before:left-0 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
-                        <Link href="/">Privacy Policy</Link>
-                    </li>
-                    <li className="md:before:bg-border relative pl-5 md:before:absolute md:before:top-1/2 md:before:left-0 md:before:h-4 md:before:w-px md:before:-translate-y-1/2 md:before:content-['']">
-                        <Link href="/">Cookie Policy</Link>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </footer>
     )
 }

@@ -37,7 +37,6 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
         <section
             className={cn(
                 "group/carousel relative flex w-full flex-col gap-1 select-none",
-                "py-8 md:py-10 lg:py-12",
                 className,
             )}
         >
