@@ -2,12 +2,13 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { MovieCardData } from "@/types/movie"
+import { MovieCardData, getFallbackImage } from "@/types/movie"
 
 import { useEffect, useState } from "react"
 
 import { ChevronLeft, ChevronRight, InfoIcon, PlayIcon, Star } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 interface HeroSliderProps {
     movies: MovieCardData[]
@@ -71,7 +72,7 @@ export default function HeroSlider({
             onMouseLeave={() => setIsPaused(false)}
         >
             {/* Background Images */}
-            <div className="absolute inset-0">
+            <div className="bg-background absolute inset-0">
                 {movies.map((movie, index) => (
                     <div
                         key={movie.id}
@@ -80,26 +81,36 @@ export default function HeroSlider({
                             index === currentIndex ? "z-10 opacity-100" : "z-0 opacity-0",
                         )}
                     >
-                        <Image
-                            src={movie.backgroundUrl || movie.posterUrl}
-                            alt={movie.title}
-                            fill
-                            priority={index === 0}
-                            className="pointer-events-none object-cover object-center"
-                            sizes="100vw"
-                        />
+                        {movie.backgroundUrl || movie.posterUrl ? (
+                            <Image
+                                src={
+                                    movie.backgroundUrl ||
+                                    movie.posterUrl ||
+                                    getFallbackImage("background")
+                                }
+                                alt={movie.title}
+                                fill
+                                priority={index === 0}
+                                className="pointer-events-none object-cover object-center"
+                                sizes="100vw"
+                            />
+                        ) : (
+                            <div className="bg-muted/20 flex h-full items-center justify-center">
+                                <div className="space-y-4 text-center">
+                                    <div className="bg-muted/30 mx-auto flex h-24 w-24 items-center justify-center rounded-full">
+                                        <span className="text-5xl">🎬</span>
+                                    </div>
+                                    <p className="text-muted-foreground">No background image</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ))}
 
-                {/* Gradient Overlays - Balanced all directions */}
-                {/* Bottom gradient - for content readability */}
-                <div className="from-background/80 via-background/40 absolute inset-0 z-20 bg-gradient-to-t via-40% to-transparent" />
-
-                {/* Left gradient - symmetric */}
-                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-r via-30% to-transparent" />
-
-                {/* Right gradient - symmetric mirror */}
-                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-gradient-to-l via-30% to-transparent" />
+                {/* Gradient Overlays */}
+                <div className="from-background/80 via-background/40 absolute inset-0 z-20 bg-linear-to-t via-40% to-transparent" />
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-linear-to-r via-30% to-transparent" />
+                <div className="from-background/60 via-background/25 absolute inset-0 z-20 bg-linear-to-l via-30% to-transparent" />
             </div>
 
             {/* Content */}
@@ -108,15 +119,19 @@ export default function HeroSlider({
                     <div className="max-w-3xl space-y-5">
                         {/* Badge */}
                         <div className="flex items-center gap-3">
-                            <div className="bg-primary flex items-center gap-1.5 rounded-lg px-3 py-1.5">
-                                <Star className="h-3.5 w-3.5 fill-white text-white" />
-                                <span className="text-sm font-bold text-white">
-                                    {(currentMovie.rating ?? 0).toFixed(1)}
+                            {currentMovie.rating !== null && (
+                                <div className="bg-primary flex items-center gap-1.5 rounded-lg px-3 py-1.5">
+                                    <Star className="h-3.5 w-3.5 fill-white text-white" />
+                                    <span className="text-sm font-bold text-white">
+                                        {currentMovie.rating.toFixed(1)}
+                                    </span>
+                                </div>
+                            )}
+                            {currentMovie.releaseYear && (
+                                <span className="text-sm font-semibold">
+                                    {currentMovie.releaseYear}
                                 </span>
-                            </div>
-                            <span className="text-sm font-semibold">
-                                {currentMovie.releaseYear}
-                            </span>
+                            )}
                         </div>
 
                         {/* Title */}
@@ -126,43 +141,66 @@ export default function HeroSlider({
 
                         {/* Meta */}
                         <div className="flex flex-wrap items-center gap-3 text-sm">
-                            <span className="font-semibold">{currentMovie.duration} min</span>
+                            {currentMovie.duration && (
+                                <span className="font-semibold">{currentMovie.duration} min</span>
+                            )}
                             {currentMovie.genre.slice(0, 3).map((g, idx) => (
                                 <span
                                     key={g}
                                     className="text-foreground/70 flex items-center gap-2"
                                 >
-                                    {idx > 0 && <span className="text-foreground/40">•</span>}
+                                    {(idx > 0 || currentMovie.duration) && (
+                                        <span className="text-foreground/40">•</span>
+                                    )}
                                     {g}
                                 </span>
                             ))}
                         </div>
 
                         {/* Description */}
-                        <p className="text-foreground/80 line-clamp-2 max-w-2xl text-lg leading-relaxed">
-                            {currentMovie.description}
-                        </p>
+                        {currentMovie.description && (
+                            <p className="text-foreground/80 line-clamp-2 max-w-2xl text-lg leading-relaxed">
+                                {currentMovie.description}
+                            </p>
+                        )}
 
                         {/* Actions */}
                         <div className="flex flex-wrap gap-3 pt-3">
-                            <Button size="lg" className="h-12 gap-2 rounded-lg px-6 font-semibold">
-                                <PlayIcon className="h-5 w-5" />
-                                Watch Now
+                            <Button
+                                size="lg"
+                                className={cn(
+                                    "h-12 gap-2 rounded-lg px-6 font-semibold",
+                                    "mb-3 cursor-pointer shadow-2xl transition-all duration-300",
+                                    "hover:scale-110 active:scale-95",
+                                )}
+                                asChild
+                            >
+                                <Link href={`/${currentMovie.slug || currentMovie.id}`}>
+                                    <PlayIcon className="mr-2 h-5 w-5 fill-current" />
+                                    Watch Now
+                                </Link>
                             </Button>
                             <Button
                                 size="lg"
                                 variant="outline"
-                                className="h-12 gap-2 rounded-lg px-6 font-semibold"
+                                className={cn(
+                                    "h-12 gap-2 rounded-lg px-6 font-semibold",
+                                    "cursor-pointer text-white backdrop-blur-sm transition-all duration-300",
+                                    "hover:scale-110 hover:border hover:border-white/20 hover:bg-white/20 active:scale-95",
+                                )}
+                                asChild
                             >
-                                <InfoIcon className="h-5 w-5" />
-                                More Info
+                                <Link href={`/${currentMovie.slug || currentMovie.id}`}>
+                                    <InfoIcon className="mr-2 h-5 w-5" />
+                                    More Info
+                                </Link>
                             </Button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Navigation Buttons - Perfect Seamless Blend */}
+            {/* Navigation Buttons */}
             {movies.length > 1 && (
                 <>
                     <button
@@ -208,7 +246,6 @@ export default function HeroSlider({
             {/* Progress Indicators */}
             {movies.length > 1 && (
                 <div className="absolute bottom-8 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-3 select-none">
-                    {/* Progress bars */}
                     <div className="flex gap-2">
                         {movies.map((_, index) => (
                             <button
@@ -233,7 +270,6 @@ export default function HeroSlider({
                         ))}
                     </div>
 
-                    {/* Counter */}
                     <div className="rounded-full bg-black/40 px-3.5 py-1.5 backdrop-blur-md">
                         <span className="text-xs font-semibold text-white">
                             {currentIndex + 1} / {movies.length}

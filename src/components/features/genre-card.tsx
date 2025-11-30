@@ -65,7 +65,7 @@ export default function GenreCard({ genre, movieCount = 0, className }: GenreCar
                 {/* Gradient Background */}
                 <div
                     className={cn(
-                        "absolute inset-0 bg-gradient-to-br transition-opacity duration-500",
+                        "absolute inset-0 bg-linear-to-br transition-opacity duration-500",
                         colors.from,
                         colors.to,
                         isHovered ? "opacity-100" : "opacity-70",
@@ -142,7 +142,7 @@ export default function GenreCard({ genre, movieCount = 0, className }: GenreCar
                 <div
                     className={cn(
                         "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500",
-                        "bg-gradient-to-r from-transparent via-white/10 to-transparent",
+                        "bg-linear-to-r from-transparent via-white/10 to-transparent",
                         isHovered && "opacity-100",
                     )}
                     style={{

@@ -11,12 +11,13 @@ import type { Movie as DbMovie, Genre } from "./database"
 export interface MovieCardData {
     id: string
     title: string
-    description: string
-    posterUrl: string
-    backgroundUrl: string
-    rating: number
-    releaseYear: number
-    duration: number
+    slug: string
+    description: string | null
+    posterUrl: string | null
+    backgroundUrl: string | null
+    rating: number | null
+    releaseYear: number | null
+    duration: number | null
     genre: string[]
 }
 
@@ -56,15 +57,23 @@ export function mapDatabaseMovieToUI(movie: DbMovie): MovieCardData {
     return {
         id: movie.id,
         title: movie.title,
-        description: movie.description || "No description available",
-        posterUrl: movie.poster_url || "https://placehold.co/500x750/1a1a1a/white?text=No+Image",
-        backgroundUrl:
-            movie.background_url ||
-            movie.poster_url ||
-            "https://placehold.co/1920x1080/1a1a1a/white?text=No+Image",
-        rating: movie.rating_average || 0,
-        releaseYear: movie.publish_year || new Date().getFullYear(),
-        duration: movie.duration_minutes || 0,
+        slug: movie.slug,
+        description: movie.description,
+        posterUrl: movie.poster_url,
+        backgroundUrl: movie.background_url,
+        rating: movie.rating_average,
+        releaseYear: movie.publish_year,
+        duration: movie.duration_minutes,
         genre: [],
     }
+}
+
+/**
+ * Get fallback image URL
+ */
+export function getFallbackImage(type: "poster" | "background" = "poster"): string {
+    if (type === "poster") {
+        return "https://placehold.co/500x750/1a1a1a/666?text=No+Poster"
+    }
+    return "https://placehold.co/1920x1080/1a1a1a/666?text=No+Image"
 }
