@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function MovieNotFound() {
     return (
-        <main className="min-h-[calc(100vh-8.5vh)]">
+        <main className="h-fit">
             {/* 404 Content */}
             <section className="container mx-auto px-4 py-20 md:px-8">
                 <div className="mx-auto max-w-2xl space-y-6 text-center">
