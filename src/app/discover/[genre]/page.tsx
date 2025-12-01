@@ -97,7 +97,7 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
     return (
         <main className="min-h-[calc(100vh-8.5vh)]">
             {/* Hero Section */}
-            <section className="from-primary/5 to-background border-b bg-gradient-to-b py-8 select-none md:py-12">
+            <section className="from-primary/5 to-background border-b bg-linear-to-b py-8 select-none md:py-12">
                 <div className="container mx-auto px-4 md:px-8">
                     {/* Back Button */}
                     <Link
@@ -129,7 +129,7 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                         <div className="flex flex-wrap items-center gap-4">
                             <div className="bg-background/80 rounded-lg border px-4 py-2 backdrop-blur-sm">
                                 <span className="text-sm font-semibold">
-                                    {totalMovies} Movies Available
+                                    {totalMovies > 1 ? ` movies` : `${totalMovies} movie`}
                                 </span>
                             </div>
                             {totalMovies > 0 && (
@@ -216,7 +216,7 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                                                 <Button
                                                     variant={isActive ? "default" : "outline"}
                                                     size="icon"
-                                                    className="min-w-[40px]"
+                                                    className="min-w-10"
                                                 >
                                                     {pageNum}
                                                 </Button>
