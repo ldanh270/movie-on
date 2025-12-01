@@ -131,6 +131,7 @@ export default function HeroSlider({
                             <div className="bg-muted/20 flex h-full items-center justify-center">
                                 <div className="space-y-4 text-center">
                                     <p className="text-muted-foreground text-9xl font-bold font-title">No background image</p>
+                                    <p className="text-muted-foreground text-9xl font-bold font-title">No background image</p>
                                 </div>
                             </div>
                         )}
