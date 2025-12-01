@@ -109,7 +109,7 @@ export default function ReviewForm({ movieId, movieTitle, onSuccess, onCancel }:
                     Your Rating <span className="text-xl text-red-500">*</span>
                 </Label>
                 <div className="flex items-center gap-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) => (
                         <button
                             key={star}
                             type="button"

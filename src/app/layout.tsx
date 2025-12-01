@@ -1,6 +1,7 @@
 import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
 import { ThemeProvider } from "@/components/theme-toggle/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 import type { Metadata } from "next"
 import { Manrope, Montserrat_Alternates, Oswald, Source_Sans_3 } from "next/font/google"
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <Footer />
                         </div>
                     </div>
+                    <Toaster position="bottom-right" />
                 </ThemeProvider>
             </body>
         </html>

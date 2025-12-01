@@ -84,7 +84,7 @@ export default async function Discover() {
             </div>
 
             {/* Bottom CTA */}
-            <div className="mt-16 text-center select-none">
+            <div className="text-center select-none">
                 <p className="text-muted-foreground">
                     Can{"'"}t find what you{"'"}re looking for?{" "}
                     <Link href="/" className="text-primary font-semibold hover:underline">

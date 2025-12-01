@@ -97,10 +97,7 @@ export default function HeroSlider({
                         ) : (
                             <div className="bg-muted/20 flex h-full items-center justify-center">
                                 <div className="space-y-4 text-center">
-                                    <div className="bg-muted/30 mx-auto flex h-24 w-24 items-center justify-center rounded-full">
-                                        <span className="text-5xl">🎬</span>
-                                    </div>
-                                    <p className="text-muted-foreground">No background image</p>
+                                    <p className="text-muted-foreground text-9xl font-bold font-title">No background image</p>
                                 </div>
                             </div>
                         )}
@@ -185,8 +182,8 @@ export default function HeroSlider({
                                 variant="outline"
                                 className={cn(
                                     "h-12 gap-2 rounded-lg px-6 font-semibold",
-                                    "cursor-pointer text-white backdrop-blur-sm transition-all duration-300",
-                                    "hover:scale-110 hover:border hover:border-white/20 hover:bg-white/20 active:scale-95",
+                                    "cursor-pointer text-foreground backdrop-blur-sm transition-all duration-300",
+                                    "hover:scale-110 hover:border hover:border-bg/20 hover:bg-white/20 dark:hover:bg-white/20  dark:hover:border-white/20 active:scale-95",
                                 )}
                                 asChild
                             >
