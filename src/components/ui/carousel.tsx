@@ -144,7 +144,7 @@ const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
                     "[&::-webkit-scrollbar]:hidden",
                     "[-ms-overflow-style:none] [scrollbar-width:none]",
                     // Thêm gradient mask để fade out các card ở 2 bên
-                    "[mask-image:linear-gradient(to_right,transparent,black_100%,black_0%,transparent)]",
+                    "mask-[linear-gradient(to_right,transparent,black_100%,black_0%,transparent)]",
                     "[-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]",
                 )}
             >

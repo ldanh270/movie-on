@@ -116,22 +116,20 @@ export class MovieService {
             .from("movie")
             .select(
                 `
-        *,
-        moviegenre (
-          genre:genre_id (
-            id,
-            name,
-            slug,
-            background_url
-          )
-        )
-      `,
+            *,
+            moviegenre (
+                genre:genre_id (
+                    id, name, slug, background_url
+                )
+            )
+        `,
             )
             .eq("slug", slug)
-            .single()
+            // Sử dụng maybeSingle() thay vì single() để nhận null thay vì lỗi khi không có dữ liệu phù hợp
+            .maybeSingle()
 
         if (error) {
-            console.error("Error fetching movie by slug:", error)
+            console.error("Error fetching movie by slug:", JSON.stringify(error, null, 2))
             return null
         }
 
@@ -179,16 +177,26 @@ export class MovieService {
         `,
                 )
                 .eq("slug", slug)
-                .single()
+                .maybeSingle()
 
             if (error) {
-                console.error("Error fetching movie detail:", error)
+                console.error("Error fetching movie detail:", {
+                    message: error.message,
+                    details: error.details,
+                    hint: error.hint,
+                    code: error.code,
+                })
                 return null
             }
 
-            return data || null
+            if (!data) {
+                console.log(`No movie found with slug: ${slug}`)
+                return null
+            }
+
+            return data
         } catch (error) {
-            console.error("Caught error:", error)
+            console.error("Caught error in getMovieDetailBySlug:", error)
             return null
         }
     }
