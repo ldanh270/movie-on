@@ -98,7 +98,7 @@ export default function GenreCard({ genre, movieCount = 0, className }: GenreCar
                             <Badge
                                 variant="secondary"
                                 className={cn(
-                                    "bg-background/80 backdrop-blur-sm transition-all duration-300",
+                                    "bg-background/80 backdrop-blur-sm transition-all duration-300 text-foreground",
                                     "group-hover:bg-background/95 group-hover:scale-105",
                                 )}
                             >
