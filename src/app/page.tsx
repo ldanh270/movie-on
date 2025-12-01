@@ -40,7 +40,7 @@ export default async function Home() {
         }
 
         return (
-            <main className="">
+            <main>
                 {/* Hero Section - Slider với Top 5 Trending Movies */}
                 {trendingMovies.length > 0 && (
                     <HeroSlider movies={trendingMovies.slice(0, 5)} autoPlayInterval={5000} />
