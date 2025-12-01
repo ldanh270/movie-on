@@ -2,13 +2,15 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { LocalStorageService } from "@/services/local-storage.service"
 import { MovieCardData, getFallbackImage } from "@/types/movie"
 
 import { useEffect, useState } from "react"
 
-import { ChevronLeft, ChevronRight, InfoIcon, PlayIcon, Star } from "lucide-react"
+import { Bookmark, BookmarkCheck, ChevronLeft, ChevronRight, PlayIcon, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { toast } from "sonner"
 
 interface HeroSliderProps {
     movies: MovieCardData[]
@@ -24,6 +26,16 @@ export default function HeroSlider({
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
     const [progress, setProgress] = useState(0)
+    const [isSaved, setIsSaved] = useState(false)
+
+    const currentMovie = movies[currentIndex]
+
+    // Check if current movie is saved
+    useEffect(() => {
+        if (currentMovie) {
+            setIsSaved(LocalStorageService.isInWatchLater(String(currentMovie.id)))
+        }
+    }, [currentMovie])
 
     useEffect(() => {
         if (isPaused || movies.length <= 1) {
@@ -44,6 +56,28 @@ export default function HeroSlider({
         return () => clearInterval(progressInterval)
     }, [isPaused, autoPlayInterval, movies.length, currentIndex])
 
+    const handleWatchLater = () => {
+        if (!currentMovie) return
+
+        if (isSaved) {
+            LocalStorageService.removeFromWatchLater(String(currentMovie.id))
+            setIsSaved(false)
+            toast.success("Removed from Watch Later")
+        } else {
+            const added = LocalStorageService.addToWatchLater({
+                id: String(currentMovie.id),
+                title: currentMovie.title,
+                slug: currentMovie.slug || String(currentMovie.id),
+                posterUrl: currentMovie.posterUrl || undefined,
+                rating: currentMovie.rating,
+            })
+            if (added) {
+                setIsSaved(true)
+                toast.success("Added to Watch Later")
+            }
+        }
+    }
+
     const goToSlide = (index: number) => {
         setCurrentIndex(index)
         setProgress(0)
@@ -59,7 +93,6 @@ export default function HeroSlider({
         setProgress(0)
     }
 
-    const currentMovie = movies[currentIndex]
     if (!currentMovie) return null
 
     return (
@@ -97,6 +130,7 @@ export default function HeroSlider({
                         ) : (
                             <div className="bg-muted/20 flex h-full items-center justify-center">
                                 <div className="space-y-4 text-center">
+                                    <p className="text-muted-foreground text-9xl font-bold font-title">No background image</p>
                                     <p className="text-muted-foreground text-9xl font-bold font-title">No background image</p>
                                 </div>
                             </div>
@@ -183,14 +217,16 @@ export default function HeroSlider({
                                 className={cn(
                                     "h-12 gap-2 rounded-lg px-6 font-semibold",
                                     "cursor-pointer text-foreground backdrop-blur-sm transition-all duration-300",
-                                    "hover:scale-110 hover:border hover:border-bg/20 hover:bg-white/20 dark:hover:bg-white/20  dark:hover:border-white/20 active:scale-95",
+                                    "hover:scale-110 hover:border hover:border-bg/20 hover:bg-white/20 dark:hover:bg-white/20 dark:hover:border-white/20 active:scale-95",
                                 )}
-                                asChild
+                                onClick={handleWatchLater}
                             >
-                                <Link href={`/${currentMovie.slug || currentMovie.id}`}>
-                                    <InfoIcon className="mr-2 h-5 w-5" />
-                                    More Info
-                                </Link>
+                                {isSaved ? (
+                                    <BookmarkCheck className="mr-2 h-5 w-5" />
+                                ) : (
+                                    <Bookmark className="mr-2 h-5 w-5" />
+                                )}
+                                {isSaved ? "Saved" : "Watch Later"}
                             </Button>
                         </div>
                     </div>
