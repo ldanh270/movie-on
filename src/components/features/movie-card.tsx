@@ -3,13 +3,15 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { LocalStorageService } from "@/services/local-storage.service"
 import { MovieCardProps, getFallbackImage } from "@/types/movie"
 
 import { useState } from "react"
 
-import { Info, PlayIcon, StarIcon } from "lucide-react"
+import { Bookmark, BookmarkCheck, PlayIcon, StarIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { toast } from "sonner"
 
 /**
  * MovieCard Component
@@ -22,9 +24,35 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
     const [isHovered, setIsHovered] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [imageLoaded, setImageLoaded] = useState(false)
+    const [isSaved, setIsSaved] = useState(
+        LocalStorageService.isInWatchLater(String(movie.id))
+    )
 
     const handlePlay = () => {
         onPlay?.(movie.id)
+    }
+
+    const handleWatchLater = (e: React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        if (isSaved) {
+            LocalStorageService.removeFromWatchLater(String(movie.id))
+            setIsSaved(false)
+            toast.success("Removed from Watch Later")
+        } else {
+            const added = LocalStorageService.addToWatchLater({
+                id: String(movie.id),
+                title: movie.title,
+                slug: movie.slug || String(movie.id),
+                posterUrl: movie.posterUrl || undefined,
+                rating: movie.rating,
+            })
+            if (added) {
+                setIsSaved(true)
+                toast.success("Added to Watch Later")
+            }
+        }
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -114,7 +142,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                         </Link>
                     </Button>
 
-                    {/* Details Button */}
+                    {/* Watch Later Button */}
                     <Button
                         size="sm"
                         variant="ghost"
@@ -124,12 +152,14 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                             isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
                         )}
                         style={{ transitionDelay: "100ms" }}
-                        asChild
+                        onClick={handleWatchLater}
                     >
-                        <Link href={`/${movieSlug}`}>
-                            <Info className="mr-1.5 h-4 w-4" />
-                            More Info
-                        </Link>
+                        {isSaved ? (
+                            <BookmarkCheck className="mr-1.5 h-4 w-4" />
+                        ) : (
+                            <Bookmark className="mr-1.5 h-4 w-4" />
+                        )}
+                        {isSaved ? "Saved" : "Watch Later"}
                     </Button>
 
                     {/* Quick Info */}

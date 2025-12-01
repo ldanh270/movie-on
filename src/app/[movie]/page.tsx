@@ -4,6 +4,7 @@ import YouTubePlayer from "@/components/features/youtube-player"
 import { Button } from "@/components/ui/button"
 import { MovieService } from "@/services/movie.service"
 import { mapDatabaseMovieToUI } from "@/types/movie"
+import SaveToHistory from "@/components/features/save-to-history"
 
 import { ArrowLeft, Calendar, Clapperboard, Clock, Eye, MessageSquare, Star } from "lucide-react"
 import { Metadata } from "next"
@@ -70,6 +71,8 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
     const movie = movieData as MovieWithGenres
 
+    // Save to watch history (client-side will be handled by a client component)
+    
     // Fetch reviews and related movies
     const [reviews, relatedMoviesRaw] = await Promise.all([
         MovieService.getMovieReviews(String(movie.id)),
@@ -91,6 +94,15 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
     return (
         <main className="min-h-screen">
+            {/* Save to History */}
+            <SaveToHistory
+                movieId={String(movie.id)}
+                title={movie.title}
+                slug={movieSlug}
+                posterUrl={movie.video_url}
+                rating={movie.rating_average}
+            />
+
             {/* Back Navigation */}
             <div className="container mx-auto px-4 py-4 md:px-8">
                 <Button

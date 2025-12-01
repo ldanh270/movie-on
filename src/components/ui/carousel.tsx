@@ -196,7 +196,13 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
                 variant={variant}
                 size={size}
                 className={cn(
-                    "absolute h-8 w-8 rounded-full",
+                    "bg-background/95 hover:bg-primary hover:text-primary-foreground active:bg-primary/90 border-primary/50 hover:border-primary",
+                    "absolute h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full",
+                    "cursor-pointer rounded-full border-2 shadow-xl backdrop-blur-sm transition-all duration-300 select-none",
+                    "opacity-0 group-hover/carousel:opacity-100",
+                    "hover:shadow-primary/20 hover:scale-110 hover:shadow-2xl active:scale-95",
+                    "disabled:hidden disabled:opacity-0",
+                    "focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none","z-10",
                     orientation === "horizontal"
                         ? "top-1/2 -left-12 -translate-y-1/2"
                         : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -204,7 +210,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
                 )}
                 disabled={!canScrollPrev}
                 onClick={scrollPrev}
-                {...props}
+                {...props}  
             >
                 <ChevronLeft className="h-4 w-4" />
                 <span className="sr-only">Previous slide</span>
@@ -225,7 +231,17 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
                 variant={variant}
                 size={size}
                 className={cn(
-                    "absolute h-8 w-8 rounded-full",
+                    "absolute rounded-full",
+                    "bg-background/95 hover:bg-primary hover:text-primary-foreground active:bg-primary/90 border-primary/50 hover:border-primary",
+                    "-right-4 md:-right-5 lg:-right-6",
+                    "h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14",
+                    "cursor-pointer rounded-full border-2 shadow-xl backdrop-blur-sm transition-all duration-300 select-none",
+                    "opacity-0 group-hover/carousel:opacity-100",
+                    "hover:shadow-primary/20 hover:scale-110 hover:shadow-2xl active:scale-95",
+                    "disabled:hidden disabled:opacity-0",
+                    "focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+                    // Đảm bảo button nằm trên gradient mask
+                    "z-10",
                     orientation === "horizontal"
                         ? "top-1/2 -right-12 -translate-y-1/2"
                         : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
