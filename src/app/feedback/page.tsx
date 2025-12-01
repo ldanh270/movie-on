@@ -10,8 +10,8 @@ export default function FeedbackPage() {
     return (
         <main className="min-h-[calc(100vh-8.5vh)]">
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 py-10 select-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(var(--primary-rgb),0.1)_0%,transparent_50%)]" />
+            <section className="relative overflow-hidden py-10 select-none">
+                <div className="absolute inset-0" />
                 <div className="container relative mx-auto px-4 md:px-8">
                     <div className="mx-auto max-w-4xl text-center space-y-6">
                         <h1 className="font-title text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
@@ -83,7 +83,7 @@ export default function FeedbackPage() {
             <section className="py-8">
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="mx-auto max-w-4xl text-center space-y-4">
-                        <p className="text-muted-foreground text-sm">
+                        <p className="text-muted-foreground text-sm select-none">
                             Need immediate assistance? Email us at{" "}
                             <a 
                                 href="mailto:ducanhle.dn@gmail.com" 
