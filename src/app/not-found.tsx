@@ -1,26 +1,17 @@
 import { Button } from "@/components/ui/button"
 
-import { ArrowLeft, Film } from "lucide-react"
+import { faBan } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
 export default function MovieNotFound() {
     return (
-        <main className="min-h-screen">
-            {/* Back Navigation */}
-            <div className="container mx-auto px-4 py-4 select-none md:px-8">
-                <Button variant="ghost" size="sm" className="gap-2" asChild>
-                    <Link href="/">
-                        <ArrowLeft className="h-4 w-4" />
-                        Back to Home
-                    </Link>
-                </Button>
-            </div>
-
+        <main className="">
             {/* 404 Content */}
-            <section className="container mx-auto px-4 py-20 md:px-8">
+            <section className="container mx-auto px-4 py-16.5 md:px-8">
                 <div className="mx-auto max-w-2xl space-y-6 text-center">
-                    <div className="bg-primary/10 mx-auto flex h-24 w-24 items-center justify-center rounded-full">
-                        <Film className="text-primary h-12 w-12" />
+                    <div className="mx-auto flex h-30 w-30 items-center justify-center rounded-full select-none">
+                        <FontAwesomeIcon icon={faBan} />
                     </div>
 
                     <div className="space-y-2 select-none">
