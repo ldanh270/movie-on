@@ -21,11 +21,11 @@ export default function GlobalError({
     return (
         <main className="container mx-auto flex min-h-[66.5vh] flex-col items-center justify-center px-4 py-20">
             <div className="mx-auto max-w-2xl space-y-6 text-center">
-                <div className="mx-auto flex h-30 w-30 items-center justify-center rounded-full select-none">
-                    <AlertCircle className="text-destructive h-50 w-50" />
+                <div className="bg-destructive/10 mx-auto flex h-20 w-20 items-center justify-center rounded-full">
+                    <AlertCircle className="text-destructive h-10 w-10" />
                 </div>
 
-                <div className="space-y-2 select-none">
+                <div className="space-y-2">
                     <h1 className="text-4xl font-bold">Oops! Something went wrong</h1>
                     <p className="text-muted-foreground text-lg">
                         We encountered an unexpected error. Please try refreshing the page.
@@ -33,17 +33,17 @@ export default function GlobalError({
                 </div>
 
                 {error.message && (
-                    <div className="bg-muted mx-auto max-w-lg rounded-lg p-4 text-center text-red-600">
-                        <p className="wrap-break-words font-mono text-sm">{error.message}</p>
+                    <div className="bg-muted mx-auto max-w-lg rounded-lg p-4 text-left">
+                        <p className="break-words font-mono text-sm">{error.message}</p>
                     </div>
                 )}
 
                 <div className="flex flex-col justify-center gap-3 pt-4 sm:flex-row">
-                    <Button onClick={reset} size="lg" className="gap-2 select-none">
+                    <Button onClick={reset} size="lg" className="gap-2">
                         <RefreshCcw className="h-4 w-4" />
                         Try Again
                     </Button>
-                    <Button variant="outline" size="lg" asChild className="gap-2 select-none">
+                    <Button variant="outline" size="lg" asChild className="gap-2">
                         <Link href="/">
                             <Home className="h-4 w-4" />
                             Go Home

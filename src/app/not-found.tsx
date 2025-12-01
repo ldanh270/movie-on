@@ -1,17 +1,15 @@
 import { Button } from "@/components/ui/button"
-
-import { faBan } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Film } from "lucide-react"
 import Link from "next/link"
 
 export default function MovieNotFound() {
     return (
-        <main className="">
+        <main className="min-h-[calc(100vh-8.5vh)]">
             {/* 404 Content */}
-            <section className="container mx-auto px-4 py-16.5 md:px-8">
+            <section className="container mx-auto px-4 py-20 md:px-8">
                 <div className="mx-auto max-w-2xl space-y-6 text-center">
-                    <div className="mx-auto flex h-30 w-30 items-center justify-center rounded-full select-none">
-                        <FontAwesomeIcon icon={faBan} />
+                    <div className="bg-primary/10 mx-auto flex h-24 w-24 items-center justify-center rounded-full select-none">
+                        <Film className="text-primary h-12 w-12" />
                     </div>
 
                     <div className="space-y-2 select-none">
