@@ -4,6 +4,7 @@
     "": {
       "name": "movie-on",
       "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^7.1.0",
         "@radix-ui/react-avatar": "^1.1.11",
         "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -26,7 +27,6 @@
       "devDependencies": {
         "@eslint/eslintrc": "^3.3.3",
         "@eslint/js": "^9.39.1",
-        "@fortawesome/fontawesome-svg-core": "^7.1.0",
         "@svgr/cli": "^8.1.0",
         "@svgr/webpack": "^8.1.0",
         "@tailwindcss/postcss": "^4.1.11",
