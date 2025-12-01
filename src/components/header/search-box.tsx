@@ -7,7 +7,7 @@ import { MovieService } from "@/services/movie.service"
 
 import { useEffect, useRef, useState } from "react"
 
-import { Loader2, Search, X } from "lucide-react"
+import { Loader2, Search, StarIcon, X } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface SearchResult {
@@ -130,7 +130,7 @@ export default function SearchBox({ className }: { className?: string }) {
                             <button
                                 key={result.id}
                                 onClick={() => handleResultClick(result.slug)}
-                                className="hover:bg-muted flex w-full items-center gap-3 border-b p-3 text-left transition-colors last:border-b-0"
+                                className="hover:bg-muted flex w-full cursor-pointer items-center gap-3 border-b p-3 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 hover:overflow-hidden"
                             >
                                 <div className="flex-1">
                                     <p className="font-medium">{result.title}</p>
@@ -139,7 +139,10 @@ export default function SearchBox({ className }: { className?: string }) {
                                         {result.rating_average && (
                                             <>
                                                 <span>•</span>
-                                                <span>⭐ {result.rating_average.toFixed(1)}</span>
+                                                <span className="flex flex-row items-center gap-1">
+                                                    <StarIcon className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400 drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]" />{" "}
+                                                    {result.rating_average.toFixed(1)}
+                                                </span>
                                             </>
                                         )}
                                     </div>
