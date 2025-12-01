@@ -21,7 +21,7 @@ const Header = () => {
                     </SheetTrigger>
                     <SheetContent
                         side="left"
-                        className="SheetClose:size-14 SheetClose:right-0 SheetClose:top-2.5 SheetClose:*:border SheetClose:*:flex SheetClose:*:items-center SheetClose:*:justify-center SheetClose:*:rounded-sm fixed flex h-[100vh] w-[70vw] flex-col justify-start gap-0 p-0"
+                        className="SheetClose:size-14 SheetClose:right-0 SheetClose:top-2.5 SheetClose:*:border SheetClose:*:flex SheetClose:*:items-center SheetClose:*:justify-center SheetClose:*:rounded-sm fixed flex h-screen w-[70vw] flex-col justify-start gap-0 p-0"
                     >
                         <SheetHeader>
                             <SheetTitle>

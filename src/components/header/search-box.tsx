@@ -1,10 +1,22 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import { MovieService } from "@/services/movie.service"
-import { MovieCardData } from "@/types/movie"
 
 import { useEffect, useRef, useState } from "react"
+
+import { Loader2, Search, StarIcon, X } from "lucide-react"
+import { useRouter } from "next/navigation"
+
+interface SearchResult {
+    id: string | number
+    title: string
+    slug: string
+    publish_year?: number | null
+    rating_average?: number | null
+}
 
 /**
  * SearchBox Component - với Real-time search
@@ -13,126 +25,140 @@ import { useEffect, useRef, useState } from "react"
  * - Single Responsibility: Chỉ quản lý search UI và logic
  * - Dependency Inversion: Phụ thuộc vào MovieService
  */
-export default function SearchBox() {
+export default function SearchBox({ className }: { className?: string }) {
     const [query, setQuery] = useState("")
-    const [activeIndex, setActiveIndex] = useState(-1)
-    const [suggestions, setSuggestions] = useState<MovieCardData[]>([])
+    const [results, setResults] = useState<SearchResult[]>([])
     const [isLoading, setIsLoading] = useState(false)
-    const rootRef = useRef<HTMLDivElement>(null)
+    const [isOpen, setIsOpen] = useState(false)
+    const router = useRouter()
+    const searchRef = useRef<HTMLDivElement>(null)
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-    // Debounce search
+    // Close dropdown when clicking outside
     useEffect(() => {
-        const delayDebounceFn = setTimeout(async () => {
-            if (query.trim().length < 2) {
-                setSuggestions([])
-                return
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
             }
+        }
 
-            setIsLoading(true)
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
+
+    // Debounced search
+    useEffect(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+        }
+
+        if (query.trim().length === 0) {
+            setResults([])
+            setIsOpen(false)
+            return
+        }
+
+        setIsLoading(true)
+
+        timeoutRef.current = setTimeout(async () => {
             try {
-                const results = await MovieService.searchMovies(query, 8)
-                setSuggestions(results)
+                const searchResults = await MovieService.searchMovies(query)
+                setResults(searchResults.slice(0, 5)) // Limit to 5 results
+                setIsOpen(true)
             } catch (error) {
                 console.error("Search error:", error)
-                setSuggestions([])
+                setResults([])
             } finally {
                 setIsLoading(false)
             }
-        }, 300) // Debounce 300ms
+        }, 300)
 
-        return () => clearTimeout(delayDebounceFn)
-    }, [query])
-
-    const resetInput = () => {
-        setActiveIndex(-1)
-        setQuery("")
-        setSuggestions([])
-    }
-
-    useEffect(() => {
-        const onClickOutside = (e: PointerEvent) => {
-            if (!rootRef.current?.contains(e.target as Node)) {
-                resetInput()
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current)
             }
         }
-        document.addEventListener("pointerdown", onClickOutside)
-        return () => document.removeEventListener("pointerdown", onClickOutside)
-    }, [])
+    }, [query])
 
-    const performSearch = (val: string) => {
-        const searchQuery = val.trim()
-        if (!searchQuery) return
-        // TODO: Navigate to search results page
-        console.log("Search for:", searchQuery)
-        resetInput()
+    const handleResultClick = (slug: string) => {
+        setQuery("")
+        setResults([])
+        setIsOpen(false)
+        router.push(`/${slug}`)
     }
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (activeIndex >= 0) performSearch(suggestions[activeIndex].title)
-        else performSearch(query)
-    }
-
-    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Escape") {
-            resetInput()
-            return
-        }
-        if (!suggestions.length) return
-        if (e.key === "ArrowDown") {
-            e.preventDefault()
-            setActiveIndex((i) => (i + 1) % suggestions.length)
-        }
-        if (e.key === "ArrowUp") {
-            e.preventDefault()
-            setActiveIndex((i) => (i - 1 + suggestions.length) % suggestions.length)
-        }
-        if (e.key === "Enter" && activeIndex >= 0) {
-            e.preventDefault()
-            performSearch(suggestions[activeIndex].title)
-        }
+    const handleClear = () => {
+        setQuery("")
+        setResults([])
+        setIsOpen(false)
     }
 
     return (
-        <div ref={rootRef} className="relative w-full max-w-md">
-            <form
-                onSubmit={onSubmit}
-                className="focus-within:bg-input flex items-center rounded-full border"
-            >
+        <div
+            ref={searchRef}
+            className={cn("dark:border-border relative w-full md:w-80", className)}
+        >
+            <div className="relative">
+                <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                 <Input
-                    value={query}
-                    onChange={(e) => {
-                        setQuery(e.target.value)
-                        setActiveIndex(-1)
-                    }}
-                    onKeyDown={onKeyDown}
+                    type="text"
                     placeholder="Search movies..."
-                    className="flex-1 rounded-full border-0 pr-2 pl-4"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    className="dark:border-border pr-9 pl-9"
                 />
-            </form>
+                {isLoading && (
+                    <Loader2 className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 animate-spin" />
+                )}
+                {!isLoading && query && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2"
+                        onClick={handleClear}
+                    >
+                        <X className="h-4 w-4" />
+                    </Button>
+                )}
+            </div>
 
-            {query.trim().length >= 2 && (
-                <div className="bg-background absolute z-30 mt-2 w-full rounded-xl border p-2 shadow-lg">
-                    {isLoading ? (
-                        <div className="text-muted-foreground px-3 py-2 text-sm">Searching...</div>
-                    ) : suggestions.length === 0 ? (
-                        <div className="text-muted-foreground px-3 py-2 text-sm">No results</div>
-                    ) : (
-                        suggestions.map((movie, i) => (
+            {/* Search Results Dropdown */}
+            {isOpen && results.length > 0 && (
+                <div className="bg-background absolute top-full mt-2 w-full rounded-lg border shadow-lg">
+                    <div className="max-h-[400px] overflow-y-auto">
+                        {results.map((result) => (
                             <button
-                                key={movie.id}
-                                type="button"
-                                className={`hover:bg-input w-full px-3 py-2 text-left text-sm hover:rounded-md ${i === activeIndex ? "bg-accent text-accent-foreground" : ""}`}
-                                onClick={() => performSearch(movie.title)}
-                                onMouseEnter={() => setActiveIndex(i)}
+                                key={result.id}
+                                onClick={() => handleResultClick(result.slug)}
+                                className="hover:bg-muted flex w-full cursor-pointer items-center gap-3 border-b p-3 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 hover:overflow-hidden"
                             >
-                                <div className="font-medium">{movie.title}</div>
-                                <div className="text-muted-foreground text-xs">
-                                    {movie.releaseYear} • {movie.genre.slice(0, 2).join(", ")}
+                                <div className="flex-1">
+                                    <p className="font-medium">{result.title}</p>
+                                    <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                                        {result.publish_year && <span>{result.publish_year}</span>}
+                                        {result.rating_average && (
+                                            <>
+                                                <span>•</span>
+                                                <span className="flex flex-row items-center gap-1">
+                                                    <StarIcon className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400 drop-shadow-[0_0_4px_rgba(250,204,21,0.5)]" />{" "}
+                                                    {result.rating_average.toFixed(1)}
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </button>
-                        ))
-                    )}
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* No Results */}
+            {isOpen && query.trim().length > 0 && !isLoading && results.length === 0 && (
+                <div className="bg-background absolute top-full mt-2 w-full rounded-lg border p-4 text-center shadow-lg">
+                    <p className="text-muted-foreground text-sm">
+                        No movies found for &#34;{query}&#34;
+                    </p>
                 </div>
             )}
         </div>
