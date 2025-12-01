@@ -160,24 +160,6 @@ export class MovieService {
     }
 
     /**
-     * Search movies theo title
-     */
-    static async searchMovies(query: string, limit = 10): Promise<MovieCardData[]> {
-        const { data, error } = await supabase
-            .from("movie")
-            .select("*")
-            .ilike("title", `%${query}%`)
-            .limit(limit)
-
-        if (error) {
-            console.error("Error searching movies:", error)
-            return []
-        }
-
-        return (data || []).map(mapDatabaseMovieToUI)
-    }
-
-    /**
      * Get movie detail by slug with genres
      */
     static async getMovieDetailBySlug(slug: string) {
@@ -427,6 +409,26 @@ export class MovieService {
             }
         } catch (error) {
             console.error("Error in updateMovieRating:", error)
+        }
+    }
+
+    /**
+     * Search movies by title
+     */
+    static async searchMovies(query: string) {
+        try {
+            const { data, error } = await supabase
+                .from("movie")
+                .select("id, title, slug, publish_year, rating_average")
+                .ilike("title", `%${query}%`)
+                .order("rating_average", { ascending: false, nullsFirst: false })
+                .limit(10)
+
+            if (error) throw error
+            return data || []
+        } catch (error) {
+            console.error("Error searching movies:", error)
+            return []
         }
     }
 }
