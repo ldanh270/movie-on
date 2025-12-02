@@ -24,9 +24,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
     const [isHovered, setIsHovered] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [imageLoaded, setImageLoaded] = useState(false)
-    const [isSaved, setIsSaved] = useState(
-        LocalStorageService.isInWatchLater(String(movie.id))
-    )
+    const [isSaved, setIsSaved] = useState(LocalStorageService.isInWatchLater(String(movie.id)))
 
     const handlePlay = () => {
         onPlay?.(movie.id)

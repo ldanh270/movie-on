@@ -34,11 +34,13 @@ export default function GlobalError({
 
                 {error.message && (
                     <div className="bg-muted mx-auto max-w-lg rounded-lg p-4 text-left">
-                        <p className="break-words font-mono text-sm text-red-500">{error.message}</p>
+                        <p className="wrap-break-words font-mono text-sm text-red-500">
+                            {error.message}
+                        </p>
                     </div>
                 )}
 
-                <div className="flex flex-col justify-center gap-3 pt-4 sm:flex-row ">
+                <div className="flex flex-col justify-center gap-3 pt-4 sm:flex-row">
                     <Button onClick={reset} size="lg" className="gap-2 select-none">
                         <RefreshCcw className="h-4 w-4" />
                         Try Again

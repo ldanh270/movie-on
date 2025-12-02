@@ -10,6 +10,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { MovieCardData } from "@/types/movie"
+
 import { LucideIcon, Trash2 } from "lucide-react"
 
 interface MovieSectionProps {
@@ -35,8 +36,8 @@ export default function MovieSection({
         <section>
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3 select-none">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                        <Icon className="h-6 w-6 text-primary" />
+                    <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-xl">
+                        <Icon className="text-primary h-6 w-6" />
                     </div>
                     <div>
                         <h2 className="font-title text-2xl font-bold md:text-3xl">{title}</h2>
@@ -59,11 +60,11 @@ export default function MovieSection({
             </div>
 
             {movieCount === 0 ? (
-                <div className="flex my-10 flex-col items-center justify-center rounded-2xl border border-dashed bg-muted/20 p-12 text-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-                        <Icon className="h-8 w-8 text-muted-foreground" />
+                <div className="bg-muted/20 my-10 flex flex-col items-center justify-center rounded-2xl border border-dashed p-12 text-center">
+                    <div className="bg-muted flex h-16 w-16 items-center justify-center rounded-full">
+                        <Icon className="text-muted-foreground h-8 w-8" />
                     </div>
-                    <h3 className="mt-4 font-semibold text-lg">{emptyMessage}</h3>
+                    <h3 className="mt-4 text-lg font-semibold">{emptyMessage}</h3>
                     <p className="text-muted-foreground mt-2 max-w-sm">{emptyDescription}</p>
                 </div>
             ) : movieCount <= 5 ? (
@@ -80,11 +81,11 @@ export default function MovieSection({
                     }}
                     className="group/carousel w-full"
                 >
-                    <CarouselContent className="-ml-2 md:-ml-4 py-10">
+                    <CarouselContent className="-ml-2 py-10 md:-ml-4">
                         {movies.map((movie) => (
                             <CarouselItem
                                 key={movie.id}
-                                className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                                className="basis-full pl-2 sm:basis-1/2 md:basis-1/3 md:pl-4 lg:basis-1/4 xl:basis-1/5"
                             >
                                 <MovieCard movie={movie} />
                             </CarouselItem>

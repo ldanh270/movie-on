@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faBan } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
-import { faBan } from '@fortawesome/free-solid-svg-icons';
+
 export default function MovieNotFound() {
     return (
         <main className="h-fit">
             {/* 404 Content */}
             <section className="container mx-auto px-4 py-20 md:px-8">
                 <div className="mx-auto max-w-2xl space-y-6 text-center">
-                    <FontAwesomeIcon icon={faBan} className="w-20 h-20 mx-auto"/>
+                    <FontAwesomeIcon icon={faBan} className="mx-auto h-20 w-20" />
 
                     <div className="space-y-2 select-none">
                         <h1 className="text-6xl font-bold">404</h1>

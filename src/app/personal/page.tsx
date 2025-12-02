@@ -3,8 +3,10 @@
 import MovieSection from "@/components/features/movie-section"
 import { LocalStorageService } from "@/services/local-storage.service"
 import { MovieCardData } from "@/types/movie"
-import { Bookmark, Clock } from "lucide-react"
+
 import { useEffect, useState } from "react"
+
+import { Bookmark, Clock } from "lucide-react"
 import { toast } from "sonner"
 
 // Section configurations
@@ -32,12 +34,12 @@ const SECTIONS = {
 } as const
 
 // Transform storage item to MovieCardData
-const transformToMovieCard = (item: { 
-    id: string; 
-    title: string; 
-    slug: string; 
-    posterUrl?: string; 
-    rating?: number | null 
+const transformToMovieCard = (item: {
+    id: string
+    title: string
+    slug: string
+    posterUrl?: string
+    rating?: number | null
 }): MovieCardData => ({
     id: item.id,
     title: item.title,
@@ -73,7 +75,7 @@ export default function PersonalPage() {
     const loadData = () => {
         const later = SECTIONS.watchLater.getItems().map(transformToMovieCard)
         const history = SECTIONS.watchHistory.getItems().map(transformToMovieCard)
-        
+
         setWatchLater(later)
         setWatchHistory(history)
     }
@@ -92,10 +94,10 @@ export default function PersonalPage() {
             <main className="min-h-[calc(100vh-8.5vh)]">
                 <div className="container mx-auto px-4 py-12 md:px-8">
                     <div className="animate-pulse space-y-12">
-                        <div className="h-12 w-64 rounded-lg bg-muted" />
+                        <div className="bg-muted h-12 w-64 rounded-lg" />
                         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                             {[1, 2, 3, 4, 5].map((i) => (
-                                <div key={i} className="h-96 rounded-lg bg-muted" />
+                                <div key={i} className="bg-muted h-96 rounded-lg" />
                             ))}
                         </div>
                     </div>
