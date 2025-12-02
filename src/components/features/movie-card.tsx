@@ -113,9 +113,6 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                 ) : (
                     <div className="flex h-full items-center justify-center">
                         <div className="space-y-2 text-center">
-                            <div className="bg-muted/30 mx-auto flex h-16 w-16 items-center justify-center rounded-full">
-                                <span className="text-3xl">🎬</span>
-                            </div>
                             <p className="text-muted-foreground text-xs">No poster</p>
                         </div>
                     </div>
