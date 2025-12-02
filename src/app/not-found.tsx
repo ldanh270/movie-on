@@ -20,7 +20,7 @@ export default function MovieNotFound() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col justify-center gap-3 pt-4 sm:flex-row">
+                    <div className="flex flex-col justify-center gap-3 pt-4 select-none sm:flex-row">
                         <Button size="lg" asChild>
                             <Link href="/">Back to Home</Link>
                         </Button>
