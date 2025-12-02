@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { LocalStorageService } from "@/services/local-storage.service"
 import { MovieCardProps, getFallbackImage } from "@/types/movie"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Bookmark, BookmarkCheck, PlayIcon, StarIcon } from "lucide-react"
 import Image from "next/image"
@@ -24,7 +24,14 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
     const [isHovered, setIsHovered] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [imageLoaded, setImageLoaded] = useState(false)
-    const [isSaved, setIsSaved] = useState(LocalStorageService.isInWatchLater(String(movie.id)))
+    const [isSaved, setIsSaved] = useState(false) // Khởi tạo false để đồng bộ với server
+    const [mounted, setMounted] = useState(false) // Kiểm tra đã mount chưa
+
+    // Chỉ check localStorage sau khi component đã mount ở client
+    useEffect(() => {
+        setMounted(true)
+        setIsSaved(LocalStorageService.isInWatchLater(String(movie.id)))
+    }, [movie.id])
 
     const handlePlay = () => {
         onPlay?.(movie.id)
@@ -152,12 +159,12 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                         style={{ transitionDelay: "100ms" }}
                         onClick={handleWatchLater}
                     >
-                        {isSaved ? (
+                        {mounted && isSaved ? (
                             <BookmarkCheck className="mr-1.5 h-4 w-4" />
                         ) : (
                             <Bookmark className="mr-1.5 h-4 w-4" />
                         )}
-                        {isSaved ? "Saved" : "Watch Later"}
+                        {mounted && isSaved ? "Saved" : "Watch Later"}
                     </Button>
 
                     {/* Quick Info */}
