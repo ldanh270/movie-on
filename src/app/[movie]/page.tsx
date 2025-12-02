@@ -6,7 +6,16 @@ import { Button } from "@/components/ui/button"
 import { MovieService } from "@/services/movie.service"
 import { mapDatabaseMovieToUI } from "@/types/movie"
 
-import { ArrowLeft, Calendar, Clapperboard, Clock, Eye, MessageSquare, Star } from "lucide-react"
+import {
+    ArrowLeft,
+    Calendar,
+    Clapperboard,
+    Clock,
+    Eye,
+    Film,
+    MessageSquare,
+    Star,
+} from "lucide-react"
 import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -241,8 +250,9 @@ export default async function MoviePage({ params }: MoviePageProps) {
                     {movie.trailer_url && (
                         <>
                             <div className="space-y-6">
-                                <h2 className="font-title text-2xl font-bold md:text-3xl">
-                                    🎬 Official Trailer
+                                <h2 className="font-title flex flex-row items-center gap-3 text-2xl font-bold select-none md:text-3xl">
+                                    <Film className="h-10 w-10" />
+                                    Official Trailer
                                 </h2>
                                 <YouTubePlayer
                                     videoUrl={movie.trailer_url}
@@ -268,7 +278,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <hr className="border-border" />
                             <div className="space-y-6">
                                 <h2 className="font-title flex flex-row items-center gap-3 pb-5 text-2xl font-bold select-none md:text-3xl">
-                                    <Clapperboard /> Related Movies
+                                    <Clapperboard className="h-10 w-10" /> Related Movies
                                 </h2>
                                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                     {relatedMovies.map((relatedMovie) => (
