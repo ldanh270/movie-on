@@ -129,7 +129,9 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                         <div className="flex flex-wrap items-center gap-4">
                             <div className="bg-background/80 rounded-lg border px-4 py-2 backdrop-blur-sm">
                                 <span className="text-sm font-semibold">
-                                    {totalMovies > 1 ? ` movies` : `${totalMovies} movie`}
+                                    {totalMovies > 1
+                                        ? `${totalMovies} movies`
+                                        : `${totalMovies} movie`}
                                 </span>
                             </div>
                             {totalMovies > 0 && (
