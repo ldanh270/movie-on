@@ -68,7 +68,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
             className={cn(
                 "group relative cursor-pointer overflow-hidden border bg-transparent transition-all duration-500 ease-out select-none",
                 "border-border/40 hover:border-primary/50",
-                "shadow-lg hover:shadow-2xl",
+                "shadow-lg hover:shadow-lg",
                 "will-change-transform",
                 "hover:z-50 hover:scale-[1.08]",
                 "focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
