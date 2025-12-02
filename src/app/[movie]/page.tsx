@@ -43,6 +43,7 @@ interface MovieWithGenres {
     title: string
     description: string | null
     video_url: string | null
+    poster_url: string | null
     trailer_url: string | null
     rating: number | null
     rating_average: number | null
@@ -108,7 +109,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                 movieId={String(movie.id)}
                 title={movie.title}
                 slug={movieSlug}
-                posterUrl={movie.video_url}
+                posterUrl={movie.poster_url}
                 rating={movie.rating_average}
             />
 
