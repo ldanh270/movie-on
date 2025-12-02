@@ -60,7 +60,7 @@ export default function MovieSection({
             </div>
 
             {movieCount === 0 ? (
-                <div className="bg-muted/20 my-10 flex flex-col items-center justify-center rounded-2xl border border-dashed p-12 text-center">
+                <div className="bg-muted/20 my-10 flex flex-col items-center justify-center rounded-2xl border border-dashed p-12 text-center select-none">
                     <div className="bg-muted flex h-16 w-16 items-center justify-center rounded-full">
                         <Icon className="text-muted-foreground h-8 w-8" />
                     </div>

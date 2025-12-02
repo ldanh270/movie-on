@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: GenrePageProps): Promise<Meta
     }
 }
 
-const MOVIES_PER_PAGE = 50
+const MOVIES_PER_PAGE = 12
 
 export default async function GenrePage({ params, searchParams }: GenrePageProps) {
     const { genre: genreSlug } = await params
@@ -134,11 +134,18 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                                         : `${totalMovies} movie`}
                                 </span>
                             </div>
-                            {totalMovies > 0 && (
+                            {totalMovies > 0 ? (
                                 <>
                                     <span className="text-muted-foreground">•</span>
                                     <span className="text-muted-foreground text-sm">
                                         Page {currentPage} of {totalPages}
+                                    </span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="text-muted-foreground">•</span>
+                                    <span className="text-muted-foreground text-sm">
+                                        Page 1 of 1
                                     </span>
                                 </>
                             )}
@@ -155,12 +162,12 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                         <div className="bg-muted mb-6 rounded-full p-8">
                             <Film className="text-muted-foreground h-20 w-20" />
                         </div>
-                        <h2 className="text-2xl font-bold">No Movies Found</h2>
+                        <h2 className="text-2xl font-bold select-none">No Movies Found</h2>
                         <p className="text-muted-foreground mt-2 max-w-md">
                             We don&#39;t have any {genre.name} movies available right now. Check
                             back later or explore other genres.
                         </p>
-                        <Link href="/discover" className="mt-6">
+                        <Link href="/discover" className="mt-6 select-none">
                             <Button>Explore Other Genres</Button>
                         </Link>
                     </div>
