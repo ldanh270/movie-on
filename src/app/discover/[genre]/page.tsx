@@ -158,16 +158,16 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
             <section className="container mx-auto px-4 py-12 md:px-8">
                 {movies.length === 0 ? (
                     // Empty State
-                    <div className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="flex flex-col items-center justify-center py-20 text-center select-none">
                         <div className="bg-muted mb-6 rounded-full p-8">
                             <Film className="text-muted-foreground h-20 w-20" />
                         </div>
-                        <h2 className="text-2xl font-bold select-none">No Movies Found</h2>
+                        <h2 className="text-2xl font-bold">No Movies Found</h2>
                         <p className="text-muted-foreground mt-2 max-w-md">
                             We don&#39;t have any {genre.name} movies available right now. Check
                             back later or explore other genres.
                         </p>
-                        <Link href="/discover" className="mt-6 select-none">
+                        <Link href="/discover" className="mt-6">
                             <Button>Explore Other Genres</Button>
                         </Link>
                     </div>
