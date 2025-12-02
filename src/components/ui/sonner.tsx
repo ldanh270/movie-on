@@ -25,12 +25,12 @@ const Toaster = ({ ...props }: ToasterProps) => {
                 loading: <Loader2Icon className="size-4 animate-spin" />,
             }}
             style={
-        {
-            "--normal-bg": "var(--background)",
-            "--normal-text": "var(--popover-foreground)",
-            "--normal-border": "var(--border)",
-            "--border-radius": "var(--radius)",
-        } as React.CSSProperties
+                {
+                    "--normal-bg": "var(--background)",
+                    "--normal-text": "var(--popover-foreground)",
+                    "--normal-border": "var(--border)",
+                    "--border-radius": "var(--radius)",
+                } as React.CSSProperties
             }
             {...props}
         />

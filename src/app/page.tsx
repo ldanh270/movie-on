@@ -28,7 +28,7 @@ export default async function Home() {
 
     // Handle case: không có data
     if (trendingMovies.length === 0 && newReleases.length === 0 && popularMovies.length === 0) {
-        throw new Error("Could not load movie list or database is empty.");
+        throw new Error("Could not load movie list or database is empty.")
     }
 
     return (
@@ -55,5 +55,6 @@ export default async function Home() {
                     <MovieCarousel title="Popular on MovieOn" movies={popularMovies} />
                 )}
             </div>
-        </main>)
+        </main>
+    )
 }
