@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { FeedbackService } from "@/services/feedback.service"
-import { Loader2, User, Mail, MessageSquare, FileText } from "lucide-react"
+
 import { useState } from "react"
+
+import { FileText, Loader2, Mail, MessageSquare, User } from "lucide-react"
 import { toast } from "sonner"
 
 export default function FeedbackForm() {
@@ -31,7 +33,7 @@ export default function FeedbackForm() {
 
         try {
             await FeedbackService.createFeedback(formData)
-            
+
             toast.success("Message sent successfully!", {
                 description: "Thanks for reaching out. We'll get back to you soon.",
             })
@@ -62,7 +64,7 @@ export default function FeedbackForm() {
                         htmlFor="sender"
                         className="flex items-center gap-2 text-sm font-medium select-none"
                     >
-                        <User className="h-4 w-4 text-primary" />
+                        <User className="text-primary h-4 w-4" />
                         Name
                     </Label>
                     <Input
@@ -74,7 +76,7 @@ export default function FeedbackForm() {
                         onChange={handleChange}
                         required
                         disabled={isLoading}
-                        className="h-12 transition-all focus-visible:ring-primary/20"
+                        className="focus-visible:ring-primary/20 h-12 transition-all"
                     />
                 </div>
 
@@ -84,7 +86,7 @@ export default function FeedbackForm() {
                         htmlFor="email"
                         className="flex items-center gap-2 text-sm font-medium select-none"
                     >
-                        <Mail className="h-4 w-4 text-primary" />
+                        <Mail className="text-primary h-4 w-4" />
                         Email
                     </Label>
                     <Input
@@ -96,7 +98,7 @@ export default function FeedbackForm() {
                         onChange={handleChange}
                         required
                         disabled={isLoading}
-                        className="h-12 transition-all focus-visible:ring-primary/20"
+                        className="focus-visible:ring-primary/20 h-12 transition-all"
                     />
                 </div>
             </div>
@@ -107,7 +109,7 @@ export default function FeedbackForm() {
                     htmlFor="title"
                     className="flex items-center gap-2 text-sm font-medium select-none"
                 >
-                    <MessageSquare className="h-4 w-4 text-primary" />
+                    <MessageSquare className="text-primary h-4 w-4" />
                     Subject
                 </Label>
                 <Input
@@ -119,7 +121,7 @@ export default function FeedbackForm() {
                     onChange={handleChange}
                     required
                     disabled={isLoading}
-                    className="h-12 transition-all focus-visible:ring-primary/20"
+                    className="focus-visible:ring-primary/20 h-12 transition-all"
                 />
             </div>
 
@@ -129,7 +131,7 @@ export default function FeedbackForm() {
                     htmlFor="description"
                     className="flex items-center gap-2 text-sm font-medium select-none"
                 >
-                    <FileText className="h-4 w-4 text-primary" />
+                    <FileText className="text-primary h-4 w-4" />
                     Message (Optional)
                 </Label>
                 <Textarea
@@ -139,7 +141,7 @@ export default function FeedbackForm() {
                     value={formData.description}
                     onChange={handleChange}
                     disabled={isLoading}
-                    className="min-h-[140px] resize-none transition-all focus-visible:ring-primary/20"
+                    className="focus-visible:ring-primary/20 min-h-[140px] resize-none transition-all"
                 />
             </div>
 
@@ -147,7 +149,7 @@ export default function FeedbackForm() {
             <Button
                 type="submit"
                 size="lg"
-                className="w-full gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] select-none"
+                className="w-full gap-2 transition-all select-none hover:scale-[1.02] active:scale-[0.98]"
                 disabled={isLoading}
             >
                 {isLoading ? (

@@ -56,11 +56,11 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "image.tmdb.org",
+                hostname: "res.cloudinary.com",
             },
             {
                 protocol: "https",
-                hostname: "via.placeholder.com",
+                hostname: "www.youtube.com",
             },
         ],
         dangerouslyAllowSVG: true,

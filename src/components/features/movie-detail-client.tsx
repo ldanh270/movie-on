@@ -48,7 +48,7 @@ export default function MovieDetailClient({
         <div className="space-y-6">
             <div className="flex items-center justify-between pb-5">
                 <h2 className="font-title flex flex-row items-center gap-3 text-2xl font-bold select-none md:text-3xl">
-                    <Star className="h-5 w-5" />
+                    <Star className="h-10 w-10" />
                     Reviews & Ratings
                 </h2>
                 {averageRating && (

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: GenrePageProps): Promise<Meta
     }
 }
 
-const MOVIES_PER_PAGE = 50
+const MOVIES_PER_PAGE = 12
 
 export default async function GenrePage({ params, searchParams }: GenrePageProps) {
     const { genre: genreSlug } = await params
@@ -129,14 +129,23 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
                         <div className="flex flex-wrap items-center gap-4">
                             <div className="bg-background/80 rounded-lg border px-4 py-2 backdrop-blur-sm">
                                 <span className="text-sm font-semibold">
-                                    {totalMovies > 1 ? ` movies` : `${totalMovies} movie`}
+                                    {totalMovies > 1
+                                        ? `${totalMovies} movies`
+                                        : `${totalMovies} movie`}
                                 </span>
                             </div>
-                            {totalMovies > 0 && (
+                            {totalMovies > 0 ? (
                                 <>
                                     <span className="text-muted-foreground">•</span>
                                     <span className="text-muted-foreground text-sm">
                                         Page {currentPage} of {totalPages}
+                                    </span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="text-muted-foreground">•</span>
+                                    <span className="text-muted-foreground text-sm">
+                                        Page 1 of 1
                                     </span>
                                 </>
                             )}
@@ -149,7 +158,7 @@ export default async function GenrePage({ params, searchParams }: GenrePageProps
             <section className="container mx-auto px-4 py-12 md:px-8">
                 {movies.length === 0 ? (
                     // Empty State
-                    <div className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="flex flex-col items-center justify-center py-20 text-center select-none">
                         <div className="bg-muted mb-6 rounded-full p-8">
                             <Film className="text-muted-foreground h-20 w-20" />
                         </div>

@@ -35,14 +35,11 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
 
     return (
         <section
-            className={cn(
-                "group/carousel relative flex w-full flex-col gap-1 select-none",
-                className,
-            )}
+            className={cn("group/carousel relative flex w-full flex-col select-none", className)}
         >
             {/* Section Title - Enhanced */}
             {title && (
-                <div className="mb-4 md:mb-6">
+                <div className="z-0">
                     <h2 className="font-title text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
                         <span className="from-foreground to-foreground/70 bg-linear-to-r bg-clip-text">
                             {title}
@@ -62,7 +59,7 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
                 }}
                 className="w-full"
             >
-                <CarouselContent className="-ml-3 pr-10 md:-ml-4 lg:mr-5 lg:-ml-6 lg:px-3 lg:py-5 lg:pr-10">
+                <CarouselContent className="z-10 -ml-3 py-4 pr-10 md:-ml-4 lg:mr-5 lg:-ml-6 lg:px-3 lg:py-10 lg:pr-10">
                     {movies.map((movie) => (
                         <CarouselItem
                             key={movie.id}
@@ -108,16 +105,6 @@ export default function MovieCarousel({ movies, title, className }: MovieCarouse
                     aria-label="Next movies"
                 />
             </Carousel>
-
-            {/* Scroll indicator - subtle hint for users */}
-            <div className="mt-4 flex justify-center gap-1.5 opacity-0 transition-opacity duration-300 group-hover/carousel:opacity-60 md:mt-6">
-                {movies.slice(0, Math.min(movies.length, 8)).map((_, index) => (
-                    <div
-                        key={index}
-                        className="bg-muted hover:bg-primary/50 h-1 w-8 rounded-full transition-all duration-300"
-                    />
-                ))}
-            </div>
         </section>
     )
 }
