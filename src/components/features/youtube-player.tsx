@@ -37,7 +37,7 @@ export default function YouTubePlayer({ videoUrl, title, className }: YouTubePla
         )
     }
 
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`
 
     return (
         <div className={cn("relative aspect-video w-full overflow-hidden rounded-lg", className)}>
