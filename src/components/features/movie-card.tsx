@@ -138,7 +138,7 @@ export default function MovieCard({ movie, className, onPlay }: MovieCardProps) 
                         style={{ transitionDelay: "50ms" }}
                         asChild
                     >
-                        <Link href={`/${movieSlug}`}>
+                        <Link href={`/watch/${movieSlug}`}>
                             <PlayIcon className="mr-2 h-5 w-5 fill-current" />
                             Watch Now
                         </Link>
