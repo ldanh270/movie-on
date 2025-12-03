@@ -22,7 +22,7 @@ const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
                     <li key={page.href}>
                         <Link
                             href={page.href}
-                            className={`${page.href === path && "font-bold"} from-primary to-primary relative bg-linear-to-r bg-size-[0%_2px] bg-bottom bg-no-repeat pb-1 transition-all duration-300 hover:bg-size-[100%_2px]`}
+                            className={`${page.href === path && "font-bold"} from-primary to-primary relative bg-linear-to-r bg-size-[0%_2px] bg-bottom bg-no-repeat pb-1 transition-all duration-300 select-none hover:bg-size-[100%_2px]`}
                         >
                             {page.label}
                         </Link>
