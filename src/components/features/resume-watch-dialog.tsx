@@ -42,7 +42,7 @@ export default function ResumeWatchDialog({
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2">
+                    <DialogTitle className="flex items-center gap-2 select-none">
                         <Clock className="h-5 w-5" />
                         Continue Watching?
                     </DialogTitle>
@@ -54,7 +54,7 @@ export default function ResumeWatchDialog({
                         . Would you like to continue from where you left off?
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter className="flex-col gap-2 sm:flex-row sm:justify-end">
+                <DialogFooter className="flex-col gap-2 select-none sm:flex-row sm:justify-end">
                     <Button
                         variant="outline"
                         onClick={() => {
