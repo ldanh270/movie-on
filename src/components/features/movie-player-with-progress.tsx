@@ -17,11 +17,18 @@ export default function MoviePlayerWithProgress({
     movieId,
 }: MoviePlayerWithProgressProps) {
     const [startTime, setStartTime] = useState(0)
+    const [playerKey, setPlayerKey] = useState(0)
+
+    const handleResumeTime = (time: number) => {
+        setStartTime(time)
+        setPlayerKey((prev) => prev + 1) // Force re-render player
+    }
 
     return (
         <>
-            <WatchProgressManager movieId={movieId} onResumeTime={setStartTime} />
+            <WatchProgressManager movieId={movieId} onResumeTime={handleResumeTime} />
             <YouTubePlayer
+                key={playerKey}
                 videoUrl={videoUrl}
                 title={title}
                 movieId={movieId}

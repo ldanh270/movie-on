@@ -32,10 +32,11 @@ export default function YouTubePlayer({
     const [isReady, setIsReady] = useState(false)
     const saveIntervalRef = useRef<NodeJS.Timeout | null>(null)
     const hasInitialized = useRef(false)
+    const initialStartTime = useRef(startTime) // Lưu startTime ban đầu
 
     const { saveProgress } = useWatchProgress(movieId || "")
 
-    // Initialize YouTube API
+    // Initialize YouTube API - CHỈ phụ thuộc vào videoId
     useEffect(() => {
         if (!videoId || hasInitialized.current) return
 
@@ -52,13 +53,13 @@ export default function YouTubePlayer({
                     autoplay: 0,
                     modestbranding: 1,
                     rel: 0,
-                    start: Math.floor(startTime),
+                    start: Math.floor(initialStartTime.current), // Dùng giá trị ref
                 },
                 events: {
                     onReady: () => {
                         setIsReady(true)
-                        if (startTime > 0 && playerRef.current) {
-                            playerRef.current.seekTo(startTime, true)
+                        if (initialStartTime.current > 0 && playerRef.current) {
+                            playerRef.current.seekTo(initialStartTime.current, true)
                         }
                     },
                 },
@@ -94,7 +95,15 @@ export default function YouTubePlayer({
             }
             hasInitialized.current = false
         }
-    }, [videoId, startTime])
+    }, [videoId]) // CHỈ phụ thuộc vào videoId
+
+    // Separate effect để handle startTime changes sau khi player đã ready
+    useEffect(() => {
+        if (isReady && playerRef.current && startTime !== initialStartTime.current) {
+            playerRef.current.seekTo(startTime, true)
+            initialStartTime.current = startTime
+        }
+    }, [startTime, isReady])
 
     // Auto-save progress every 10 seconds
     useEffect(() => {
