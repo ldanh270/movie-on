@@ -54,6 +54,7 @@ export default function YouTubePlayer({ videoUrl, title, className }: YouTubePla
             <iframe
                 src={embedUrl}
                 title={title}
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 className="absolute inset-0 h-full w-full"
