@@ -207,7 +207,7 @@ export default function HeroSlider({
                                 )}
                                 asChild
                             >
-                                <Link href={`/${currentMovie.slug || currentMovie.id}`}>
+                                <Link href={`/watch/${currentMovie.slug || currentMovie.id}`}>
                                     <PlayIcon className="mr-2 h-5 w-5 fill-current" />
                                     Watch Now
                                 </Link>
