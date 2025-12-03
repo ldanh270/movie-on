@@ -11,7 +11,7 @@ const Navbar = ({ vertical = false }: { vertical?: boolean }) => {
     const pages = [
         { href: "/", label: "Home" },
         { href: "/discover", label: "Discover" },
-        { href: "/personal", label: "Personal" },
+        { href: "/bookmark", label: "Bookmark" },
         { href: "/feedback", label: "Feedback" },
     ]
 

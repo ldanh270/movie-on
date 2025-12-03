@@ -53,7 +53,7 @@ const transformToMovieCard = (item: {
     backgroundUrl: null,
 })
 
-export default function PersonalPage() {
+export default function MyBookmarkPage() {
     const [watchLater, setWatchLater] = useState<MovieCardData[]>([])
     const [watchHistory, setWatchHistory] = useState<MovieCardData[]>([])
     const [mounted, setMounted] = useState(false)
@@ -113,7 +113,7 @@ export default function PersonalPage() {
                     {/* Header */}
                     <div className="space-y-2 select-none">
                         <h1 className="font-title text-4xl font-bold md:text-5xl">
-                            My <span className="text-primary">Personal</span>
+                            My <span className="text-primary">Bookmark</span>
                         </h1>
                         <p className="text-muted-foreground text-lg">
                             Your saved movies and watch history
