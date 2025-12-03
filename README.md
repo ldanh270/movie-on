@@ -79,7 +79,7 @@ Tailwind v4 tokens are mapped through `@theme` in `styles/globals.css`.
 Example usage:
 
 ```tsx
-<button className="bg-primary text-primary-foreground px-5 py-2 rounded-lg">Watch Now</button>
+<button className="bg-primary text-primary-foreground rounded-lg px-5 py-2">Watch Now</button>
 ```
 
 ## Fonts
