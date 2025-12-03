@@ -26,16 +26,26 @@ interface GenreCardProps {
 
 // Gradient colors cho mỗi genre (tuân thủ color scheme)
 const genreColors: Record<string, { from: string; to: string; icon: string }> = {
-    action: { from: "from-red-500/20", to: "to-orange-500/20", icon: "text-red-500" },
-    comedy: { from: "from-yellow-500/20", to: "to-amber-500/20", icon: "text-yellow-500" },
-    drama: { from: "from-purple-500/20", to: "to-pink-500/20", icon: "text-purple-500" },
-    horror: { from: "from-gray-800/20", to: "to-red-900/20", icon: "text-red-700" },
-    romance: { from: "from-pink-500/20", to: "to-rose-500/20", icon: "text-pink-500" },
-    thriller: { from: "from-blue-500/20", to: "to-indigo-500/20", icon: "text-blue-500" },
-    scifi: { from: "from-cyan-500/20", to: "to-blue-500/20", icon: "text-cyan-500" },
-    fantasy: { from: "from-violet-500/20", to: "to-purple-500/20", icon: "text-violet-500" },
-    animation: { from: "from-green-500/20", to: "to-teal-500/20", icon: "text-green-500" },
-    documentary: { from: "from-slate-500/20", to: "to-gray-500/20", icon: "text-slate-500" },
+    action: { from: "from-red-600/20", to: "to-orange-600/20", icon: "text-red-600" },
+    comedy: { from: "from-amber-500/20", to: "to-yellow-500/20", icon: "text-amber-500" },
+    drama: { from: "from-indigo-500/20", to: "to-purple-600/20", icon: "text-indigo-500" },
+    horror: { from: "from-zinc-800/20", to: "to-red-950/20", icon: "text-zinc-700" },
+    romance: { from: "from-rose-500/20", to: "to-pink-600/20", icon: "text-rose-500" },
+    thriller: { from: "from-slate-600/20", to: "to-blue-800/20", icon: "text-slate-600" },
+    scifi: { from: "from-sky-500/20", to: "to-cyan-600/20", icon: "text-sky-500" },
+    fantasy: { from: "from-fuchsia-500/20", to: "to-violet-600/20", icon: "text-fuchsia-500" },
+    animation: { from: "from-emerald-500/20", to: "to-green-600/20", icon: "text-emerald-500" },
+    documentary: { from: "from-stone-600/20", to: "to-neutral-700/20", icon: "text-stone-600" },
+    adventure: { from: "from-lime-500/20", to: "to-teal-600/20", icon: "text-lime-600" },
+    mystery: { from: "from-violet-700/20", to: "to-purple-900/20", icon: "text-violet-700" },
+    crime: { from: "from-gray-700/20", to: "to-slate-900/20", icon: "text-gray-700" },
+    war: { from: "from-orange-800/20", to: "to-red-900/20", icon: "text-orange-800" },
+    family: { from: "from-amber-700/20", to: "to-orange-800/20", icon: "text-amber-700" },
+    musical: { from: "from-pink-400/20", to: "to-fuchsia-500/20", icon: "text-pink-400" },
+    biography: { from: "from-teal-600/20", to: "to-cyan-700/20", icon: "text-teal-600" },
+    history: { from: "from-brown-600/20", to: "to-amber-800/20", icon: "text-amber-800" },
+    sport: { from: "from-green-600/20", to: "to-lime-700/20", icon: "text-green-600" },
+    leducanh: { from: "from-sky-400/20", to: "to-blue-500/20", icon: "text-sky-400" },
 }
 
 // Default color nếu không match
