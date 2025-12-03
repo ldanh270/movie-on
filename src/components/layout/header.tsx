@@ -1,7 +1,7 @@
 import Logo from "@/components/header/logo"
-import { ModeToggle } from "@/components/header/mode-toggle"
 import Navbar from "@/components/header/navbar"
 import SearchBox from "@/components/header/search-box"
+import { ModeToggle } from "@/components/theme-toggle/mode-toggle"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
