@@ -32,12 +32,15 @@ export function useWatchProgress(movieId: string) {
         }
     }, [movieId])
 
-    // Save progress to localStorage
+    // Save progress to localStorage - chỉ gọi khi cleanup
     const saveProgress = useCallback(
         (currentTime: number, duration: number) => {
             if (currentTime < MIN_WATCH_TIME || duration === 0) return
 
             const percentage = (currentTime / duration) * 100
+
+            // Không lưu nếu đã xem gần hết
+            if (percentage >= MAX_PERCENTAGE) return
 
             const newProgress: WatchProgress = {
                 movieId,

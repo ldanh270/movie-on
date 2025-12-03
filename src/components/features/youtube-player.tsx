@@ -30,9 +30,8 @@ export default function YouTubePlayer({
     const videoId = extractVideoId(videoUrl)
     const playerRef = useRef<YouTubePlayerType | null>(null)
     const [isReady, setIsReady] = useState(false)
-    const saveIntervalRef = useRef<NodeJS.Timeout | null>(null)
     const hasInitialized = useRef(false)
-    const initialStartTime = useRef(startTime) // Lưu startTime ban đầu
+    const initialStartTime = useRef(startTime)
 
     const { saveProgress } = useWatchProgress(movieId || "")
 
@@ -53,7 +52,7 @@ export default function YouTubePlayer({
                     autoplay: 0,
                     modestbranding: 1,
                     rel: 0,
-                    start: Math.floor(initialStartTime.current), // Dùng giá trị ref
+                    start: Math.floor(initialStartTime.current),
                 },
                 events: {
                     onReady: () => {
@@ -84,64 +83,82 @@ export default function YouTubePlayer({
             initializePlayer()
         }
 
-        // Cleanup
+        // Cleanup - Lưu progress khi unmount
         return () => {
-            if (saveIntervalRef.current) {
-                clearInterval(saveIntervalRef.current)
+            if (
+                playerRef.current &&
+                movieId &&
+                typeof playerRef.current.getCurrentTime === "function"
+            ) {
+                try {
+                    const currentTime = playerRef.current.getCurrentTime()
+                    const duration = playerRef.current.getDuration()
+                    const playerState = playerRef.current.getPlayerState()
+
+                    // Chỉ lưu nếu không phải đã xem hết
+                    if (currentTime > 0 && duration > 0 && playerState !== 0) {
+                        saveProgress(currentTime, duration)
+                    }
+                } catch (error) {
+                    console.error("Error saving progress on cleanup:", error)
+                }
             }
+
             if (playerRef.current) {
-                playerRef.current.destroy()
+                try {
+                    playerRef.current.destroy()
+                } catch (error) {
+                    console.error("Error destroying player:", error)
+                }
                 playerRef.current = null
             }
             hasInitialized.current = false
         }
-    }, [videoId]) // CHỈ phụ thuộc vào videoId
+    }, [videoId, movieId, saveProgress])
 
     // Separate effect để handle startTime changes sau khi player đã ready
     useEffect(() => {
-        if (isReady && playerRef.current && startTime !== initialStartTime.current) {
-            playerRef.current.seekTo(startTime, true)
-            initialStartTime.current = startTime
+        if (
+            isReady &&
+            playerRef.current &&
+            startTime !== initialStartTime.current &&
+            typeof playerRef.current.seekTo === "function"
+        ) {
+            try {
+                playerRef.current.seekTo(startTime, true)
+                initialStartTime.current = startTime
+            } catch (error) {
+                console.error("Error seeking to time:", error)
+            }
         }
     }, [startTime, isReady])
 
-    // Auto-save progress every 10 seconds
+    // Save progress khi user rời trang (beforeunload)
     useEffect(() => {
-        if (!isReady || !playerRef.current || !movieId) return
+        if (!movieId) return
 
-        const saveCurrentProgress = () => {
-            try {
-                const currentTime = playerRef.current?.getCurrentTime()
-                const duration = playerRef.current?.getDuration()
-                const playerState = playerRef.current?.getPlayerState()
+        const handleBeforeUnload = () => {
+            if (playerRef.current && typeof playerRef.current.getCurrentTime === "function") {
+                try {
+                    const currentTime = playerRef.current.getCurrentTime()
+                    const duration = playerRef.current.getDuration()
+                    const playerState = playerRef.current.getPlayerState()
 
-                // Only save if video is playing or paused (not ended)
-                if (
-                    currentTime !== undefined &&
-                    duration !== undefined &&
-                    currentTime > 0 &&
-                    duration > 0 &&
-                    playerState !== 0 // YouTubePlayerState.ENDED
-                ) {
-                    saveProgress(currentTime, duration)
+                    if (currentTime > 0 && duration > 0 && playerState !== 0) {
+                        saveProgress(currentTime, duration)
+                    }
+                } catch (error) {
+                    console.error("Error saving progress on beforeunload:", error)
                 }
-            } catch (error) {
-                console.error("Error saving progress:", error)
             }
         }
 
-        // Save immediately when ready
-        saveCurrentProgress()
-
-        // Then save every 10 seconds
-        saveIntervalRef.current = setInterval(saveCurrentProgress, 10000)
+        window.addEventListener("beforeunload", handleBeforeUnload)
 
         return () => {
-            if (saveIntervalRef.current) {
-                clearInterval(saveIntervalRef.current)
-            }
+            window.removeEventListener("beforeunload", handleBeforeUnload)
         }
-    }, [isReady, movieId, saveProgress])
+    }, [movieId, saveProgress])
 
     if (!videoId) {
         return (
