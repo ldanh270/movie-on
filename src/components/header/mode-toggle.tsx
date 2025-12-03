@@ -33,7 +33,7 @@ export function ModeToggle() {
             {/* Theme options */}
             <DropdownMenuContent
                 align="center"
-                className="bg-background *:hover:bg-input *:dark:hover:bg-input *:hover:text-primary mx-3 mt-1 *:cursor-pointer *:px-2 *:py-2 *:text-sm"
+                className="bg-background *:hover:bg-input *:dark:hover:bg-input *:hover:text-primary mx-3 mt-1 *:cursor-pointer *:px-4 *:py-2 *:text-sm"
             >
                 <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
