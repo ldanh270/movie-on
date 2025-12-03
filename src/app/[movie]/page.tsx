@@ -1,10 +1,12 @@
 import MovieCard from "@/components/features/movie-card"
 import MovieDetailClient from "@/components/features/movie-detail-client"
+import MoviePlayerWithProgress from "@/components/features/movie-player-with-progress"
 import SaveToHistory from "@/components/features/save-to-history"
 import YouTubePlayer from "@/components/features/youtube-player"
 import { Button } from "@/components/ui/button"
 import { MovieService } from "@/services/movie.service"
 import { mapDatabaseMovieToUI } from "@/types/movie"
+import type { MovieWithGenres, Review } from "@/types/movie-detail"
 
 import {
     ArrowLeft,
@@ -22,35 +24,6 @@ import { notFound } from "next/navigation"
 
 interface MoviePageProps {
     params: Promise<{ movie: string }>
-}
-
-interface MovieGenre {
-    genre: {
-        id: string | number
-        name: string
-    }
-}
-
-// Thêm interface này để định nghĩa kiểu dữ liệu cho Review
-interface Review {
-    rating: number | string | null
-}
-
-interface MovieWithGenres {
-    id: string | number
-    movie_id: string | number
-    genre_id: string | number
-    title: string
-    description: string | null
-    video_url: string | null
-    poster_url: string | null
-    trailer_url: string | null
-    rating: number | null
-    rating_average: number | null
-    publish_year: number | null
-    duration_minutes: number | null
-    view_count: number | null
-    moviegenre?: MovieGenre[] | null
 }
 
 export async function generateMetadata({ params }: MoviePageProps): Promise<Metadata> {
@@ -81,8 +54,6 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
     const movie = movieData as MovieWithGenres
 
-    // Save to watch history (client-side will be handled by a client component)
-
     // Fetch reviews and related movies
     const [reviews, relatedMoviesRaw] = await Promise.all([
         MovieService.getMovieReviews(String(movie.id)),
@@ -94,17 +65,14 @@ export default async function MoviePage({ params }: MoviePageProps) {
         ? movie.moviegenre.map((mg) => mg.genre.name)
         : []
 
-    // FIX: Sử dụng interface Review thay vì any
     let averageRating: string | null = null
     if (Array.isArray(reviews) && reviews.length > 0) {
-        // r được định kiểu là Review, TypeScript sẽ hiểu r.rating tồn tại
         const total = reviews.reduce((sum, r: Review) => sum + (Number(r.rating) || 0), 0)
         averageRating = (total / reviews.length).toFixed(1)
     }
 
     return (
         <main className="min-h-screen">
-            {/* Save to History */}
             <SaveToHistory
                 movieId={String(movie.id)}
                 title={movie.title}
@@ -132,10 +100,10 @@ export default async function MoviePage({ params }: MoviePageProps) {
             <section className="bg-background select-none">
                 <div className="container mx-auto px-4 py-8 md:px-8 lg:py-12">
                     {movie.video_url ? (
-                        <YouTubePlayer
+                        <MoviePlayerWithProgress
                             videoUrl={movie.video_url}
                             title={movie.title}
-                            className="mx-auto max-w-7xl"
+                            movieId={String(movie.id)}
                         />
                     ) : (
                         <div className="bg-muted/20 mx-auto flex aspect-video max-w-7xl items-center justify-center rounded-lg border">
@@ -265,7 +233,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                         </>
                     )}
 
-                    {/* Reviews Section - Using Client Component */}
+                    {/* Reviews Section */}
                     <MovieDetailClient
                         movieId={String(movie.id)}
                         movieTitle={movie.title}
